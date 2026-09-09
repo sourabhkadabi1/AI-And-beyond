@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@config "../tailwind.config.js";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-dark-bg: var(--bg-page);
+  --color-dark-surface: var(--bg-surface);
+  --color-dark-surface-2: var(--bg-surface-2);
+  --color-dark-border: var(--border-color);
+  --color-text-1: var(--text-primary);
+  --color-text-2: var(--text-secondary);
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+:root {
+  --bg-page: #F8FAFC;
+  --bg-surface: #FFFFFF;
+  --bg-surface-2: #F1F5F9;
+  --border-color: #E2E8F0;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --accent: #5A50EE;
+  --accent-2: #0099BB;
+}
+
+html.dark {
+  --bg-page: #080C14;
+  --bg-surface: #111827;
+  --bg-surface-2: #162032;
+  --border-color: #1E293B;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --accent: #6366F1;
+  --accent-2: #38BDF8;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Fallback direct utility classes in case Tailwind v4 theme mapping has edge cases */
+.bg-accent { background-color: var(--accent) !important; }
+.bg-accent-2 { background-color: var(--accent-2) !important; }
+.text-accent { color: var(--accent) !important; }
+.border-accent { border-color: var(--accent) !important; }
+
+.bg-dark-bg { background-color: var(--bg-page) !important; }
+.bg-dark-surface { background-color: var(--bg-surface) !important; }
+.bg-dark-surface-2 { background-color: var(--bg-surface-2) !important; }
+.border-dark-border { border-color: var(--border-color) !important; }
+
+.text-text-1 { color: var(--text-primary) !important; }
+.text-text-2 { color: var(--text-secondary) !important; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-page); }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* Post content styling */
+.post-content h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 600; margin: 2rem 0 1rem; color: var(--text-primary); }
+.post-content h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 600; margin: 1.5rem 0 0.75rem; color: var(--text-primary); }
+.post-content p { line-height: 1.8; margin-bottom: 1.25rem; color: var(--text-secondary); }
+.post-content ul, .post-content ol { margin: 1rem 0 1.5rem 1.5rem; color: var(--text-secondary); }
+.post-content li { margin-bottom: 0.5rem; line-height: 1.7; }
+.post-content a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.post-content blockquote { border-left: 3px solid var(--accent); padding-left: 1.25rem; margin: 1.5rem 0; color: var(--text-secondary); font-style: italic; }
+.post-content code { font-family: 'JetBrains Mono', monospace; background: var(--bg-surface-2); padding: 0.2em 0.4em; border-radius: 4px; font-size: 0.875em; color: var(--accent); }
+.post-content pre { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.25rem; overflow-x: auto; margin: 1.5rem 0; }
+.post-content pre code { background: none; padding: 0; color: var(--text-primary); }
+.post-content img { border-radius: 8px; width: 100%; margin: 1.5rem 0; }
+
+/* Line clamp utilities */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+.animate-shake { animation: shake 0.3s ease-in-out; }
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

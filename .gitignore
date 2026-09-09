@@ -1,0 +1,57 @@
+# ==========================================
+# AIAndBeyond — Root .gitignore
+# ==========================================
+
+# 1. Environment & Secrets (NEVER COMMIT!)
+.env
+.env.*
+!.env.example
+*.env
+
+# 2. Python & Backend
+__pycache__/
+*/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# 3. Database & Uploads
+*.db
+*.sqlite
+*.sqlite3
+backend/ainandbeyond.db
+
+# 4. Node & Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+dist-ssr/
+*.local
+
+# 5. Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 6. IDE & OS files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
