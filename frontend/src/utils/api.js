@@ -32,4 +32,13 @@ export const uploadImage = (formData) =>
     headers: { 'Content-Type': 'multipart/form-data' }
   })
 
+export const subscribeNewsletter = (email) =>
+  api.post('/api/subscribers', { email })
+
+export const fetchSubscribers = () =>
+  api.get('/api/admin/subscribers')
+
+export const deleteSubscriber = (id) =>
+  api.delete(`/api/admin/subscribers/${id}`)
+
 export default api

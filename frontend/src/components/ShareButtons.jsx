@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 export default function ShareButtons({ title, url }) {
   const [copied, setCopied] = useState(false)
-  const fullUrl = `https://ainandbeyond.com/blog/${url}`
+  const fullUrl = `https://aiandbeyond.com/blog/${url}`
 
   const copyLink = () => {
     navigator.clipboard.writeText(fullUrl)

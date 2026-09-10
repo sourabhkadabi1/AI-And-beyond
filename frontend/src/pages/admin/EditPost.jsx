@@ -8,7 +8,7 @@ import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
 import TipTapLink from '@tiptap/extension-link';
 
-const MenuBar = ({ editor }) => {
+const MenuBar = ({ editor, onPasteHtml }) => {
   if (!editor) {
     return null;
   }
@@ -100,6 +100,14 @@ const MenuBar = ({ editor }) => {
       >
         Image
       </button>
+      <button
+        type="button"
+        onClick={onPasteHtml}
+        className="px-3 py-1.5 rounded-md text-sm font-medium transition-colors bg-accent/20 text-accent hover:bg-accent/30 border border-accent/30 ml-auto"
+        title="Paste HTML code and instantly convert to formatted text"
+      >
+        Paste HTML
+      </button>
     </div>
   );
 };
@@ -134,9 +142,27 @@ export default function EditPost() {
     editorProps: {
       attributes: {
         class: 'prose max-w-none min-h-[400px] p-4 focus:outline-none'
+      },
+      handlePaste: (view, event) => {
+        const text = event.clipboardData?.getData('text/plain');
+        if (text && /<\/?(p|h1|h2|h3|h4|div|ul|ol|li|blockquote|strong|em|table|hr)\b/i.test(text)) {
+          event.preventDefault();
+          editor?.commands.setContent(text, false);
+          toast.success('Pasted HTML converted to rich text!');
+          return true;
+        }
+        return false;
       }
     }
   });
+
+  const handlePasteHtml = () => {
+    const html = window.prompt('Paste HTML code here:');
+    if (html !== null && html.trim() !== '') {
+      editor?.commands.setContent(html, false);
+      toast.success('HTML converted to rich formatted text!');
+    }
+  };
 
   useEffect(() => {
     const loadPost = async () => {
@@ -283,7 +309,7 @@ export default function EditPost() {
                     <label className="block text-text-2 text-sm font-medium mb-2">Slug</label>
                     <div className="flex items-center border border-dark-border rounded-lg bg-dark-surface overflow-hidden">
                       <span className="px-3 text-text-2/50 text-sm bg-dark-surface-2 border-r border-dark-border py-3">
-                        ainandbeyond.com/blog/
+                        aiandbeyond.com/blog/
                       </span>
                       <input
                         type="text"
@@ -299,7 +325,7 @@ export default function EditPost() {
                   <div>
                     <label className="block text-text-2 text-sm font-medium mb-2">Content</label>
                     <div className="border border-dark-border rounded-lg bg-dark-surface overflow-hidden">
-                      <MenuBar editor={editor} />
+                      <MenuBar editor={editor} onPasteHtml={handlePasteHtml} />
                       <EditorContent editor={editor} />
                     </div>
                   </div>

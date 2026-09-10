@@ -12,7 +12,7 @@ cloudinary.config(
     secure=True
 )
 
-def upload_image(file_bytes, folder="ainandbeyond"):
+def upload_image(file_bytes, folder="aiandbeyond"):
     result = cloudinary.uploader.upload(
         file_bytes,
         folder=folder,

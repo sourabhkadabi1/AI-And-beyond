@@ -23,7 +23,7 @@ export default function App() {
       <ThemeProvider>
         <AuthProvider>
           <BrowserRouter>
-            <div className="min-h-screen flex flex-col bg-dark-bg text-text-1 transition-colors duration-200">
+            <div className="min-h-screen flex flex-col bg-canvas-mesh text-text-1 transition-colors duration-200">
               <Navbar />
               <main className="flex-grow">
                 <Routes>

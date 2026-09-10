@@ -62,3 +62,14 @@ class TokenResponse(BaseModel):
 class ImageUploadResponse(BaseModel):
     url: str
     public_id: str
+
+class SubscriberCreate(BaseModel):
+    email: str
+
+class SubscriberOut(BaseModel):
+    id: int
+    email: str
+    created_at: datetime
+
+    class Config:
+        from_attributes = True

@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { fetchPosts } from '../utils/api'
+import { fetchPosts, subscribeNewsletter } from '../utils/api'
 import { affiliates } from '../utils/affiliates'
 import BlogCard from '../components/BlogCard'
-import { ArrowRight, Mail, ExternalLink, ImageIcon, BookOpen, Lightbulb, Rocket, Quote, FileText, CheckCircle2 } from 'lucide-react'
+import toast from 'react-hot-toast'
+import { ArrowRight, Mail, ExternalLink, ImageIcon, BookOpen, Lightbulb, Rocket, Quote, FileText, CheckCircle2, Check } from 'lucide-react'
 
 const CATEGORIES = [
   {
@@ -36,6 +37,12 @@ const CATEGORIES = [
     desc: 'Smart workflows and apps to get more done in less time',
     image: '/productivity.png'
   },
+  {
+    name: 'MakeMoneyWithAI',
+    color: '#8B5CF6',
+    desc: 'earn money with AI tools and strategies',
+    image: '/'
+  }
 ]
 
 const spotlightAffiliates = [affiliates.hostinger, affiliates.canva, affiliates.nordvpn]
@@ -43,6 +50,29 @@ const spotlightAffiliates = [affiliates.hostinger, affiliates.canva, affiliates.
 export default function Home() {
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(true)
+  const [emailInput, setEmailInput] = useState('')
+  const [submittingEmail, setSubmittingEmail] = useState(false)
+  const [subscribedStatus, setSubscribedStatus] = useState(null)
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault()
+    if (!emailInput.trim() || submittingEmail) return
+    try {
+      setSubmittingEmail(true)
+      const res = await subscribeNewsletter(emailInput.trim())
+      if (res.data?.status === 'exists') {
+        toast('You are already on our list!', { icon: '✨' })
+      } else {
+        toast.success('Welcome to AIAndBeyond!')
+      }
+      setSubscribedStatus(res.data?.message || 'Thank you for subscribing!')
+      setEmailInput('')
+    } catch (err) {
+      toast.error(err.response?.data?.detail || 'Subscription failed. Please check your email.')
+    } finally {
+      setSubmittingEmail(false)
+    }
+  }
 
   useEffect(() => {
     async function load() {
@@ -59,28 +89,28 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="bg-slate-50 dark:bg-[#080C14] min-h-screen text-slate-900 dark:text-slate-100 transition-colors duration-200">
+    <div className="min-h-screen text-slate-900 dark:text-slate-100 transition-colors duration-200">
 
       {/* ═══════════════════════════════════════════════════════
           HERO SECTION — gradient glow + hero image
          ═══════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden border-b border-slate-200 dark:border-slate-800/80 bg-white dark:bg-[#080C14]">
+      <section className="relative overflow-hidden pb-12 pt-4 border-b border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-[#080C14]/80 backdrop-blur-md">
         {/* Subtle Ambient Background Blobs */}
-        <div className="absolute top-[-100px] right-[-60px] w-[450px] h-[450px] rounded-full bg-indigo-500/10 dark:bg-indigo-500/15 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-[-80px] left-[-40px] w-[400px] h-[400px] rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none" />
+        <div className="absolute top-[-100px] right-[-60px] w-[500px] h-[500px] rounded-full bg-indigo-500/10 dark:bg-indigo-500/15 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-[-80px] left-[-40px] w-[450px] h-[450px] rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-28 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-24 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             {/* Hero Copy */}
             <div className="lg:col-span-7">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 text-xs font-bold mb-6 shadow-sm">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200/90 dark:border-indigo-800/70 text-indigo-700 dark:text-indigo-300 text-xs font-bold mb-6 shadow-sm">
                 <Rocket className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
-                <span>Your AI & Tech Companion</span>
+                <span>✨ YOUR AI & TECH COMPANION</span>
               </div>
 
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-[1.12] mb-6 tracking-tight">
-                Your Guide to <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 bg-clip-text text-transparent">AI Tools</span> & What Comes Next.
+              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-950 dark:text-white leading-[1.12] mb-6 tracking-tight">
+                Your Guide to <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-500 bg-clip-text text-transparent">AI Tools</span> & What Comes Next.
               </h1>
 
               <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 mb-8 max-w-xl leading-relaxed font-normal">
@@ -91,14 +121,14 @@ export default function Home() {
               <div className="flex flex-wrap items-center gap-4 mb-10">
                 <Link 
                   to="/blog" 
-                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-indigo-600/30 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-bold rounded-xl transition-all shadow-lg shadow-indigo-600/30 hover:scale-105 active:scale-95 cursor-pointer"
                 >
                   <span>Read the Blog</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link 
                   to="/blog" 
-                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-white hover:bg-slate-100 text-slate-800 border-2 border-slate-300 dark:bg-slate-900 dark:hover:bg-slate-800 dark:text-slate-100 dark:border-slate-700 font-bold rounded-xl transition-all shadow-sm hover:-translate-y-0.5 cursor-pointer"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-white hover:bg-slate-50 text-slate-800 border-2 border-slate-300/90 dark:bg-slate-900 dark:hover:bg-slate-800 dark:text-slate-100 dark:border-slate-700 font-bold rounded-xl transition-all shadow-sm hover:shadow active:scale-95 cursor-pointer"
                 >
                   Browse Topics
                 </Link>
@@ -147,39 +177,58 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          STATS BAR — credibility strip
+          STATS BAR — elevated credibility island (Anti-Glare)
          ═══════════════════════════════════════════════════════ */}
-      <section className="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/70">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div>
-              <p className="font-display text-3xl font-bold text-indigo-600 dark:text-indigo-400">100+</p>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 font-semibold">Articles Published</p>
+      <section className="relative -mt-8 sm:-mt-10 mb-8 z-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="rounded-2xl p-4 sm:p-6 bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xl shadow-slate-200/60 dark:shadow-black/40">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 text-center">
+            
+            <div className="p-3.5 sm:p-4 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/40 hover:scale-[1.02] transition-transform">
+              <div className="w-8 h-8 mx-auto mb-2 rounded-lg bg-indigo-600/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-sm">
+                📚
+              </div>
+              <p className="font-display text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">100+</p>
+              <p className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 mt-1">Articles Published</p>
             </div>
-            <div>
-              <p className="font-display text-3xl font-bold text-cyan-600 dark:text-cyan-400">5</p>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 font-semibold">Expert Categories</p>
+
+            <div className="p-3.5 sm:p-4 rounded-xl bg-cyan-50/70 dark:bg-cyan-950/30 border border-cyan-100 dark:border-cyan-900/40 hover:scale-[1.02] transition-transform">
+              <div className="w-8 h-8 mx-auto mb-2 rounded-lg bg-cyan-600/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center font-bold text-sm">
+                ⚡
+              </div>
+              <p className="font-display text-2xl sm:text-3xl font-extrabold text-cyan-600 dark:text-cyan-400">5</p>
+              <p className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 mt-1">Expert Categories</p>
             </div>
-            <div>
-              <p className="font-display text-3xl font-bold text-amber-500">10K+</p>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 font-semibold">Monthly Readers</p>
+
+            <div className="p-3.5 sm:p-4 rounded-xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-100 dark:border-amber-900/40 hover:scale-[1.02] transition-transform">
+              <div className="w-8 h-8 mx-auto mb-2 rounded-lg bg-amber-600/10 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold text-sm">
+                👥
+              </div>
+              <p className="font-display text-2xl sm:text-3xl font-extrabold text-amber-600 dark:text-amber-400">10K+</p>
+              <p className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 mt-1">Monthly Readers</p>
             </div>
-            <div>
-              <p className="font-display text-3xl font-bold text-emerald-500">Weekly</p>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 font-semibold">Fresh Drops</p>
+
+            <div className="p-3.5 sm:p-4 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-100 dark:border-emerald-900/40 hover:scale-[1.02] transition-transform">
+              <div className="w-8 h-8 mx-auto mb-2 rounded-lg bg-emerald-600/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-sm">
+                🔥
+              </div>
+              <p className="font-display text-2xl sm:text-3xl font-extrabold text-emerald-600 dark:text-emerald-400">Weekly</p>
+              <p className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 mt-1">Fresh Drops</p>
             </div>
+
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          LATEST POSTS — featured articles
+          LATEST POSTS — featured articles (Distinct Tinted Section)
          ═══════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-slate-50 dark:bg-[#080C14]">
+      <section className="py-16 sm:py-24 bg-slate-100/90 dark:bg-[#0d1424] border-b-2 border-slate-200 dark:border-slate-800/80 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-end mb-12">
             <div>
-              <div className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-2">From the Blog</div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200/90 dark:border-indigo-800/70 mb-3 shadow-xs">
+                FROM THE BLOG
+              </div>
               <h2 className="font-display text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">Latest Posts</h2>
               <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base mt-1">Fresh guides, reviews, and tutorials</p>
             </div>
@@ -191,7 +240,7 @@ export default function Home() {
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[1, 2, 3].map(i => (
-                <div key={i} className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden animate-pulse">
+                <div key={i} className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm overflow-hidden animate-pulse">
                   <div className="h-48 bg-slate-100 dark:bg-slate-800" />
                   <div className="p-5 space-y-3">
                     <div className="h-4 bg-slate-100 dark:bg-slate-800 rounded w-1/4" />
@@ -208,7 +257,7 @@ export default function Home() {
               ))}
             </div>
           ) : (
-            <div className="text-center py-16 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-8 shadow-sm">
+            <div className="text-center py-16 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-8 shadow-sm">
               <FileText className="w-12 h-12 mx-auto mb-4 text-indigo-600 dark:text-indigo-400 opacity-40" />
               <p className="text-lg font-bold text-slate-900 dark:text-white mb-2">No posts yet</p>
               <p className="text-sm text-slate-600 dark:text-slate-400">Create your first post from the admin dashboard!</p>
@@ -227,12 +276,14 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          EXPLORE TOPICS — 3 + 2 layout with image previews
+          EXPLORE TOPICS — 3 + 2 layout with image previews (Pure White Section)
          ═══════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
+      <section className="py-20 sm:py-24 bg-white dark:bg-[#080C14] border-b-2 border-slate-200 dark:border-slate-800/80 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <div className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-2">Categories</div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-200/90 dark:border-purple-800/70 mb-3 shadow-xs">
+              CATEGORIES
+            </div>
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-3">Explore Topics</h2>
             <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-xl mx-auto">
               Dive into our five specialized categories designed to upgrade your technical toolkit.
@@ -245,7 +296,7 @@ export default function Home() {
               <Link
                 key={cat.name}
                 to={`/blog?category=${encodeURIComponent(cat.name)}`}
-                className="group block bg-slate-50 hover:bg-white dark:bg-slate-950 dark:hover:bg-[#0F1626] rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-indigo-500/50 hover:shadow-xl transition-all duration-300 overflow-hidden"
+                className="group block bg-slate-50/70 hover:bg-white dark:bg-slate-950 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-indigo-500/50 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
               >
                 {/* Image slot */}
                 <div className="h-44 overflow-hidden relative bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
@@ -289,7 +340,7 @@ export default function Home() {
               <Link
                 key={cat.name}
                 to={`/blog?category=${encodeURIComponent(cat.name)}`}
-                className="group block bg-slate-50 hover:bg-white dark:bg-slate-950 dark:hover:bg-[#0F1626] rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-indigo-500/50 hover:shadow-xl transition-all duration-300 overflow-hidden"
+                className="group block bg-slate-50/70 hover:bg-white dark:bg-slate-950 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-indigo-500/50 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
               >
                 <div className="h-44 overflow-hidden relative bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
                   <img 
@@ -329,12 +380,14 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          HOW IT WORKS — 3-step visual workflow
+          HOW IT WORKS — 3-step visual workflow (Distinct Tinted Section)
          ═══════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-slate-50 dark:bg-[#080C14]">
+      <section className="py-20 sm:py-24 bg-slate-100/90 dark:bg-[#0d1424] border-b-2 border-slate-200 dark:border-slate-800/80 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <div className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-2">Our Process</div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/90 dark:border-emerald-800/70 mb-3 shadow-xs">
+              OUR PROCESS
+            </div>
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-3">How It Works</h2>
             <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base">Three simple steps to level up your technical mastery</p>
           </div>
@@ -365,7 +418,7 @@ export default function Home() {
             ].map((item) => (
               <div 
                 key={item.step} 
-                className="relative text-center p-8 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 hover:shadow-xl transition-all duration-300"
+                className="relative text-center p-8 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
               >
                 <div 
                   className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full text-xs font-bold text-white shadow-sm"
@@ -388,12 +441,14 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          AFFILIATE SPOTLIGHT — with guaranteed button visibility
+          AFFILIATE SPOTLIGHT — with guaranteed button visibility (Pure White Section)
          ═══════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
+      <section className="py-20 sm:py-24 bg-white dark:bg-[#080C14] border-b-2 border-slate-200 dark:border-slate-800/80 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <div className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-2">Recommended Stack</div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-cyan-50 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border border-cyan-200/90 dark:border-cyan-800/70 mb-3 shadow-xs">
+              RECOMMENDED STACK
+            </div>
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-3">Tools We Actually Use</h2>
             <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-xl mx-auto">
               Battle-tested services powering our workflow. Every single tool is tested and approved.
@@ -406,7 +461,7 @@ export default function Home() {
               return (
                 <div 
                   key={aff.name} 
-                  className="bg-slate-50 dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 hover:shadow-xl hover:border-indigo-500/40 transition-all duration-300 overflow-hidden flex flex-col"
+                  className="bg-slate-50/70 hover:bg-white dark:bg-slate-950 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-indigo-500/40 hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col"
                 >
                   {/* Image slot */}
                   <div className="h-44 overflow-hidden relative bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
@@ -451,10 +506,13 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          TESTIMONIAL / SOCIAL PROOF — with visible avatar
+          TESTIMONIAL / SOCIAL PROOF — with visible avatar (Distinct Tinted Section)
          ═══════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-slate-50 dark:bg-[#080C14]">
+      <section className="py-20 sm:py-24 bg-slate-100/90 dark:bg-[#0d1424] border-b-2 border-slate-200 dark:border-slate-800/80 transition-colors">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200/90 dark:border-amber-800/70 mb-8 shadow-xs">
+            COMMUNITY TRUST
+          </div>
           <Quote className="w-10 h-10 text-indigo-600 dark:text-indigo-400 opacity-40 mx-auto mb-6 rotate-180" />
           <blockquote className="font-display text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white leading-relaxed mb-6">
             "AIAndBeyond is my go-to hub whenever I need to evaluate software or understand a new AI framework without the marketing hype."
@@ -473,9 +531,9 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          NEWSLETTER SECTION
+          NEWSLETTER SECTION (Pure White Section)
          ═══════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
+      <section className="py-20 sm:py-24 bg-white dark:bg-[#080C14] transition-colors">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-gradient-to-br from-indigo-600 via-indigo-700 to-purple-800 text-white rounded-3xl p-8 sm:p-14 text-center relative overflow-hidden shadow-2xl shadow-indigo-600/20 border border-white/10">
             {/* Ambient circular backdrop */}
@@ -495,26 +553,34 @@ export default function Home() {
               <p className="text-xs text-white/70 mb-8 font-medium">
                 Join 1,000+ readers · Zero spam · Unsubscribe anytime
               </p>
-              <form 
-                className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" 
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  alert('Thank you for subscribing to AIAndBeyond!');
-                }}
-              >
-                <input
-                  type="email"
-                  placeholder="Enter your email address"
-                  className="flex-grow px-4 py-3 rounded-xl border border-white/30 focus:outline-none focus:ring-2 focus:ring-white bg-white text-slate-900 placeholder-slate-500 shadow-md text-sm font-medium"
-                  required
-                />
-                <button
-                  type="submit"
-                  className="px-6 py-3 bg-slate-950 hover:bg-black text-white font-bold text-sm rounded-xl transition-colors whitespace-nowrap shadow-lg cursor-pointer active:scale-95"
+              {subscribedStatus ? (
+                <div className="inline-flex items-center gap-2.5 px-6 py-4 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 text-white font-bold text-sm shadow-lg animate-fadeIn">
+                  <Check className="w-5 h-5 text-emerald-300" />
+                  <span>{subscribedStatus}</span>
+                </div>
+              ) : (
+                <form 
+                  className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" 
+                  onSubmit={handleSubscribe}
                 >
-                  Join Free
-                </button>
-              </form>
+                  <input
+                    type="email"
+                    placeholder="Enter your email address"
+                    value={emailInput}
+                    onChange={(e) => setEmailInput(e.target.value)}
+                    disabled={submittingEmail}
+                    className="flex-grow px-4 py-3 rounded-xl border border-white/30 focus:outline-none focus:ring-2 focus:ring-white bg-white text-slate-900 placeholder-slate-500 shadow-md text-sm font-medium disabled:opacity-60"
+                    required
+                  />
+                  <button
+                    type="submit"
+                    disabled={submittingEmail}
+                    className="px-6 py-3 bg-slate-950 hover:bg-black text-white font-bold text-sm rounded-xl transition-all whitespace-nowrap shadow-lg cursor-pointer active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {submittingEmail ? 'Subscribing...' : 'Join Free'}
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         </div>

@@ -20,7 +20,7 @@ export default function BlogCard({ post }) {
   return (
     <Link
       to={`/blog/${post.slug}`}
-      className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:shadow-xl hover:border-indigo-500/50 transition-all duration-300 overflow-hidden"
+      className="group block rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-xl hover:border-indigo-500/50 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
     >
       {post.cover_image && (
         <div className="h-48 overflow-hidden bg-slate-100 dark:bg-slate-800">
