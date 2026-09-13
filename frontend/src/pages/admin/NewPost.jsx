@@ -355,6 +355,7 @@ export default function NewPost() {
                       <option value="Tech Reviews">Tech Reviews</option>
                       <option value="Tutorials">Tutorials</option>
                       <option value="Productivity">Productivity</option>
+                      <option value="MakeMoneyWithAI">MakeMoneyWithAI</option>
                     </select>
                   </div>
 

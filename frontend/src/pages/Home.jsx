@@ -39,10 +39,10 @@ const CATEGORIES = [
   },
   {
     name: 'MakeMoneyWithAI',
-    color: '#8B5CF6',
-    desc: 'earn money with AI tools and strategies',
-    image: '/'
-  }
+    color: '#16A34A',
+    desc: 'Proven blueprints, side hustles, and monetizing intelligent AI systems',
+    image: '/makemoneywithai.png'
+  },
 ]
 
 const spotlightAffiliates = [affiliates.hostinger, affiliates.canva, affiliates.nordvpn]
@@ -286,62 +286,18 @@ export default function Home() {
             </div>
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-3">Explore Topics</h2>
             <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-xl mx-auto">
-              Dive into our five specialized categories designed to upgrade your technical toolkit.
+              Dive into our six specialized categories designed to upgrade your technical toolkit.
             </p>
           </div>
 
-          {/* Row 1: 3 cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-            {CATEGORIES.slice(0, 3).map((cat) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {CATEGORIES.map((cat) => (
               <Link
                 key={cat.name}
                 to={`/blog?category=${encodeURIComponent(cat.name)}`}
                 className="group block bg-slate-50/70 hover:bg-white dark:bg-slate-950 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-indigo-500/50 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
               >
                 {/* Image slot */}
-                <div className="h-44 overflow-hidden relative bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
-                  <img 
-                    src={cat.image} 
-                    alt={cat.name} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                      e.currentTarget.nextElementSibling.style.display = 'flex';
-                    }}
-                  />
-                  <div className="hidden w-full h-full flex-col items-center justify-center p-3 text-center" style={{ backgroundColor: `${cat.color}15` }}>
-                    <ImageIcon className="w-8 h-8 mb-1" style={{ color: cat.color }} />
-                    <span className="text-xs font-bold text-slate-900 dark:text-white">{cat.name} Visual</span>
-                    <span className="text-[10px] text-slate-500 dark:text-slate-400">800 × 500 px</span>
-                  </div>
-                </div>
-
-                <div className="p-5">
-                  <div className="flex items-center gap-2.5 mb-2.5">
-                    <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: cat.color }} />
-                    <h3 className="font-display text-lg font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                      {cat.name}
-                    </h3>
-                  </div>
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
-                    {cat.desc}
-                  </p>
-                  <div className="flex items-center gap-1 text-xs font-bold" style={{ color: cat.color }}>
-                    Explore Category <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          {/* Row 2: 2 cards centered */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            {CATEGORIES.slice(3, 5).map((cat) => (
-              <Link
-                key={cat.name}
-                to={`/blog?category=${encodeURIComponent(cat.name)}`}
-                className="group block bg-slate-50/70 hover:bg-white dark:bg-slate-950 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-indigo-500/50 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
-              >
                 <div className="h-44 overflow-hidden relative bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
                   <img 
                     src={cat.image} 

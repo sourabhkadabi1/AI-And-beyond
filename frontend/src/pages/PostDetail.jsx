@@ -13,7 +13,8 @@ const CATEGORY_COLORS = {
   'Web Hosting': '#0099BB',
   'Tech Reviews': '#FF8C42',
   'Tutorials': '#00B07D',
-  'Productivity': '#FF6B9D'
+  'Productivity': '#FF6B9D',
+  'MakeMoneyWithAI': '#16A34A'
 };
 
 export default function PostDetail() {

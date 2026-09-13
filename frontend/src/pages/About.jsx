@@ -6,7 +6,8 @@ const TOPICS = [
   { name: 'Web Hosting', color: '#0099BB' },
   { name: 'Tech Reviews', color: '#FF8C42' },
   { name: 'Tutorials', color: '#00B07D' },
-  { name: 'Productivity', color: '#FF6B9D' }
+  { name: 'Productivity', color: '#FF6B9D' },
+  { name: 'MakeMoneyWithAI', color: '#16A34A' }
 ];
 
 export default function About() {

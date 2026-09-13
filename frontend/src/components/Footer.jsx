@@ -35,7 +35,7 @@ export default function Footer() {
             <div>
               <p className="text-text-1 font-semibold text-sm mb-3">Topics</p>
               <div className="flex flex-col gap-2">
-                {['AI Tools', 'Web Hosting', 'Tutorials', 'Tech Reviews', 'Productivity'].map(cat => (
+                {['AI Tools', 'Web Hosting', 'Tutorials', 'Tech Reviews', 'Productivity', 'MakeMoneyWithAI'].map(cat => (
                   <Link key={cat} to={`/blog?category=${encodeURIComponent(cat)}`} className="text-text-2 text-sm hover:text-accent transition-colors">
                     {cat}
                   </Link>
