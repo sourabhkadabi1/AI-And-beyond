@@ -352,7 +352,7 @@ export default function NewPost() {
                     >
                       <option value="AI Tools">AI Tools</option>
                       <option value="Web Hosting">Web Hosting</option>
-                      <option value="Tech Reviews">Tech Reviews</option>
+                      <option value="AI Agents & Automation">AI Agents & Automation</option>
                       <option value="Tutorials">Tutorials</option>
                       <option value="Productivity">Productivity</option>
                       <option value="MakeMoneyWithAI">MakeMoneyWithAI</option>

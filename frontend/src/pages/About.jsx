@@ -4,7 +4,7 @@ import { Bookmark, ExternalLink } from 'lucide-react';
 const TOPICS = [
   { name: 'AI Tools', color: '#5A50EE' },
   { name: 'Web Hosting', color: '#0099BB' },
-  { name: 'Tech Reviews', color: '#FF8C42' },
+  { name: 'AI Agents & Automation', color: '#FF8C42' },
   { name: 'Tutorials', color: '#00B07D' },
   { name: 'Productivity', color: '#FF6B9D' },
   { name: 'MakeMoneyWithAI', color: '#16A34A' }

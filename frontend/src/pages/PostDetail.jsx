@@ -11,7 +11,7 @@ import { ArrowLeft, Calendar, Clock, Bookmark } from 'lucide-react';
 const CATEGORY_COLORS = {
   'AI Tools': '#5A50EE',
   'Web Hosting': '#0099BB',
-  'Tech Reviews': '#FF8C42',
+  'AI Agents & Automation': '#FF8C42',
   'Tutorials': '#00B07D',
   'Productivity': '#FF6B9D',
   'MakeMoneyWithAI': '#16A34A'

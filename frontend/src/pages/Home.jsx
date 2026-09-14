@@ -20,10 +20,10 @@ const CATEGORIES = [
     image: '/web_hosting.png'
   },
   {
-    name: 'Tech Reviews',
+    name: 'AI Agents & Automation',
     color: '#FF8C42',
-    desc: 'Honest, hands-on reviews of the latest gadgets and software',
-    image: '/tech_reviews.png'
+    desc: 'Next-gen autonomous agents, n8n workflows, and smart business automations',
+    image: '/ai_automation.png'
   },
   {
     name: 'Tutorials',

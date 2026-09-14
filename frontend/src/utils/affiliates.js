@@ -54,7 +54,7 @@ export const affiliates = {
 export const categoryAffiliate = {
   "AI Tools": affiliates.coursera,
   "Web Hosting": affiliates.hostinger,
-  "Tech Reviews": affiliates.canva,
+  "AI Agents & Automation": affiliates.coursera,
   "Tutorials": affiliates.coursera,
   "Productivity": affiliates.canva,
   "MakeMoneyWithAI": affiliates.coursera,

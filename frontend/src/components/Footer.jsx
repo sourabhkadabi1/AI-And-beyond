@@ -17,7 +17,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-text-2 text-sm max-w-xs leading-relaxed">
-              AI tools, tech reviews, and tutorials for students and professionals who want to stay ahead.
+              AI tools, AI agents, automation workflows, and tutorials for students and professionals who want to stay ahead.
             </p>
           </div>
 
@@ -35,7 +35,7 @@ export default function Footer() {
             <div>
               <p className="text-text-1 font-semibold text-sm mb-3">Topics</p>
               <div className="flex flex-col gap-2">
-                {['AI Tools', 'Web Hosting', 'Tutorials', 'Tech Reviews', 'Productivity', 'MakeMoneyWithAI'].map(cat => (
+                {['AI Tools', 'AI Agents & Automation', 'Web Hosting', 'Tutorials', 'Productivity', 'MakeMoneyWithAI'].map(cat => (
                   <Link key={cat} to={`/blog?category=${encodeURIComponent(cat)}`} className="text-text-2 text-sm hover:text-accent transition-colors">
                     {cat}
                   </Link>
