@@ -18,61 +18,55 @@ export default function Blog() {
 
   const POSTS_PER_PAGE = 12
 
-  // Debounced search
   useEffect(() => {
-    const timer = setTimeout(() => {
-      const current = searchParams.get('search') || ''
-      if (searchInput !== current) {
-        const newParams = new URLSearchParams(searchParams)
-        if (searchInput) {
-          newParams.set('search', searchInput)
-        } else {
-          newParams.delete('search')
-        }
-        setSearchParams(newParams)
-        setPage(0)
-      }
-    }, 300)
-
-    return () => clearTimeout(timer)
-  }, [searchInput])
+    setPage(0)
+    setPosts([])
+    setHasMore(true)
+  }, [categoryParam, searchParam])
 
   useEffect(() => {
-    async function loadPosts() {
+    async function load() {
       try {
         setLoading(true)
-        const offset = page * POSTS_PER_PAGE
-        const res = await fetchPosts(categoryParam, searchParam, offset)
-        const data = res.data || []
-        setPosts(data)
-        setHasMore(data.length === POSTS_PER_PAGE)
-      } catch (error) {
-        console.error('Error fetching blog posts:', error)
-        setPosts([])
+        const res = await fetchPosts(categoryParam, searchParam, page)
+        const newPosts = res.data || []
+        setPosts(prev => page === 0 ? newPosts : [...prev, ...newPosts])
+        if (newPosts.length < POSTS_PER_PAGE) {
+          setHasMore(false)
+        }
+      } catch (e) {
+        console.error(e)
       } finally {
         setLoading(false)
       }
     }
-    loadPosts()
+    load()
   }, [categoryParam, searchParam, page])
 
   const handleCategoryChange = (cat) => {
-    const newParams = new URLSearchParams(searchParams)
+    const params = new URLSearchParams(searchParams)
     if (cat) {
-      newParams.set('category', cat)
+      params.set('category', cat)
     } else {
-      newParams.delete('category')
+      params.delete('category')
     }
-    newParams.delete('search')
-    setSearchParams(newParams)
-    setSearchInput('')
-    setPage(0)
+    setSearchParams(params)
+  }
+
+  const handleSearch = (e) => {
+    e.preventDefault()
+    const params = new URLSearchParams(searchParams)
+    if (searchInput.trim()) {
+      params.set('search', searchInput.trim())
+    } else {
+      params.delete('search')
+    }
+    setSearchParams(params)
   }
 
   const clearFilters = () => {
     setSearchInput('')
-    setSearchParams(new URLSearchParams())
-    setPage(0)
+    setSearchParams({})
   }
 
   const handlePrev = () => {
@@ -91,52 +85,61 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen text-slate-900 dark:text-slate-100 flex flex-col">
-      {/* ── Top Header & Filter Deck (Pure White Tier) ── */}
-      <div className="bg-white dark:bg-[#080C14] border-b-2 border-slate-200 dark:border-slate-800/80 py-12 sm:py-16 transition-colors">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-10">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200/90 dark:border-indigo-800/70 mb-3 shadow-xs">
-              KNOWLEDGE BASE
-            </div>
-            <h1 className="font-display text-4xl md:text-5xl font-extrabold text-slate-950 dark:text-white mb-3">
-              Our Blog
-            </h1>
-            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed">
-              Discover the latest trends, tutorials, and insights in AI, Web Hosting, and beyond.
-            </p>
-          </div>
+      {/* ── Top Header & Filter Deck with Particle Cosmos ── */}
+      <div className="relative overflow-hidden bg-transparent border-b border-slate-200/60 dark:border-white/5 py-12 sm:py-16 transition-colors">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          {/* Frosted Glass Control Deck */}
+          <div className="glass-card rounded-3xl p-8 sm:p-10 relative overflow-hidden shadow-2xl">
+            {/* Top hairline reflection */}
+            <div className="absolute inset-x-0 top-0 h-px glow-streak pointer-events-none" />
 
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
-            <div className="w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0">
-              <CategoryFilter active={categoryParam} onChange={handleCategoryChange} />
-            </div>
-
-            <div className="relative w-full lg:w-80">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                <Search size={18} className="text-slate-400" />
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+              <div>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-indigo-50 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/60 mb-3 shadow-xs">
+                  KNOWLEDGE BASE
+                </div>
+                <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-950 dark:text-white tracking-tight">
+                  Our Blog
+                </h1>
+                <p className="text-base text-slate-600 dark:text-slate-300 max-w-xl mt-1 leading-relaxed">
+                  Discover the latest trends, tutorials, and insights in AI, Web Hosting, and beyond.
+                </p>
               </div>
-              <input
-                type="text"
-                className="bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 text-sm rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 pr-10 py-2.5 transition-all shadow-xs"
-                placeholder="Search articles..."
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-              />
-              {searchInput && (
-                <button
-                  onClick={() => setSearchInput('')}
-                  className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-white"
-                >
-                  <X size={18} />
-                </button>
-              )}
+
+              {/* Glassmorphic Search Bar */}
+              <form onSubmit={handleSearch} className="relative w-full md:w-80">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                  <Search size={18} className="text-indigo-600 dark:text-indigo-400" />
+                </div>
+                <input
+                  type="text"
+                  className="bg-white/80 dark:bg-slate-900/70 backdrop-blur-md border border-slate-300/80 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 text-sm rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 pr-10 py-2.5 transition-all shadow-xs"
+                  placeholder="Search articles..."
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                />
+                {searchInput && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchInput('')}
+                    className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-white"
+                  >
+                    <X size={18} />
+                  </button>
+                )}
+              </form>
+            </div>
+
+            {/* Filter Pills Deck */}
+            <div className="pt-6 border-t border-slate-200/80 dark:border-white/10">
+              <CategoryFilter active={categoryParam} onChange={handleCategoryChange} />
             </div>
           </div>
         </div>
       </div>
 
-      {/* ── Posts Grid Surface (Soft Slate Tier with High Card Contrast) ── */}
-      <div className="flex-1 bg-slate-100/90 dark:bg-[#0d1424] py-12 sm:py-16 transition-colors">
+      {/* ── Posts Grid Surface (Transparent so particles flow through) ── */}
+      <div className="flex-1 bg-transparent py-12 sm:py-16 transition-colors">
         <div className="max-w-7xl mx-auto px-6">
           {(categoryParam || searchParam) && (
             <div className="mb-8 flex items-center gap-2 text-slate-600 dark:text-slate-300 flex-wrap text-sm">

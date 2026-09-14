@@ -13,26 +13,38 @@ const TOPICS = [
 export default function About() {
   return (
     <div className="min-h-screen text-slate-900 dark:text-slate-100 flex flex-col">
-      {/* ── Top Header Banner (Pure White Tier) ── */}
-      <div className="bg-white dark:bg-[#080C14] border-b-2 border-slate-200 dark:border-slate-800/80 py-12 sm:py-16 transition-colors">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-extrabold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200/90 dark:border-indigo-800/70 mb-4 shadow-xs">
-            OUR MISSION & STORY
+      {/* ── Top Header Banner (Translucent, Global Particles Flowing Behind) ── */}
+      <div className="relative overflow-hidden bg-transparent border-b border-slate-200/60 dark:border-white/5 py-12 sm:py-16 transition-colors">
+        {/* Ambient Glows */}
+        <div className="absolute top-[-100px] right-[-60px] w-[500px] h-[500px] rounded-full bg-indigo-500/15 dark:bg-indigo-600/20 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-[-80px] left-[-40px] w-[450px] h-[450px] rounded-full bg-purple-500/10 dark:bg-purple-600/15 blur-3xl pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
+          <div className="glass-card rounded-3xl p-8 sm:p-12 relative overflow-hidden shadow-2xl">
+            {/* Top hairline reflection */}
+            <div className="absolute inset-x-0 top-0 h-px glow-streak pointer-events-none" />
+
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-extrabold bg-indigo-50 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/60 mb-4 shadow-xs">
+              OUR MISSION & STORY
+            </div>
+            <h1 className="font-display text-4xl md:text-5xl font-extrabold text-slate-950 dark:text-white mb-4 tracking-tight">
+              About AIAndBeyond
+            </h1>
+            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
+              Making sense of the rapidly evolving AI and technology landscape with clear, actionable, and hype-free intelligence.
+            </p>
           </div>
-          <h1 className="font-display text-4xl md:text-5xl font-extrabold text-slate-950 dark:text-white mb-4 tracking-tight">
-            About AIAndBeyond
-          </h1>
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Making sense of the rapidly evolving AI and technology landscape with clear, actionable, and hype-free intelligence.
-          </p>
         </div>
       </div>
 
-      {/* ── Content Container (Soft Slate Tier with Elevated White Card) ── */}
-      <div className="flex-1 bg-slate-100/90 dark:bg-[#0d1424] py-12 sm:py-16 transition-colors">
+      {/* ── Content Container (Frosted Glass Story Card Floating Above Particles) ── */}
+      <div className="flex-1 bg-transparent py-12 sm:py-16 transition-colors">
         <div className="max-w-3xl mx-auto px-6">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-3xl p-8 sm:p-12 shadow-md space-y-8">
-            <div className="space-y-4 text-slate-700 dark:text-slate-300 leading-relaxed text-base sm:text-lg">
+          <div className="glass-card rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden space-y-8">
+            {/* Top hairline reflection */}
+            <div className="absolute inset-x-0 top-0 h-px glow-streak pointer-events-none" />
+
+            <div className="space-y-4 text-slate-700 dark:text-slate-300 leading-relaxed text-base sm:text-lg font-normal">
               <p>
                 Welcome to <strong className="text-slate-950 dark:text-white font-bold">AIAndBeyond</strong>! We are passionate about exploring the frontiers of artificial intelligence, web development, and modern productivity tools. Our goal is to test, review, and synthesize complex technical breakthroughs into clean insights you can use.
               </p>
@@ -44,16 +56,16 @@ export default function About() {
               </div>
             </div>
 
-            <div className="pt-6 border-t border-slate-100 dark:border-slate-800">
+            <div className="pt-6 border-t border-slate-200/80 dark:border-white/10">
               <h2 className="font-display text-2xl font-bold text-slate-950 dark:text-white mb-6">What We Cover</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {TOPICS.map(topic => (
-                  <div key={topic.name} className="flex items-center gap-3.5 p-4 bg-slate-50 dark:bg-slate-950 border border-slate-200/90 dark:border-slate-800 rounded-xl hover:shadow-sm transition-shadow">
+                  <div key={topic.name} className="flex items-center gap-3.5 p-4 rounded-2xl glass-card glass-card-hover hover:scale-[1.02] transition-all">
                     <div 
                       className="w-3.5 h-3.5 rounded-full flex-shrink-0 shadow-xs" 
                       style={{ backgroundColor: topic.color }}
                     ></div>
-                    <span className="font-bold text-sm text-slate-900 dark:text-white">{topic.name}</span>
+                    <span className="font-bold text-sm text-slate-950 dark:text-white">{topic.name}</span>
                   </div>
                 ))}
               </div>

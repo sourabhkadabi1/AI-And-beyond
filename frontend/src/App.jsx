@@ -15,6 +15,8 @@ import Dashboard from './pages/admin/Dashboard'
 import NewPost from './pages/admin/NewPost'
 import EditPost from './pages/admin/EditPost'
 
+import ParticleCanvas from './components/ParticleCanvas'
+
 const queryClient = new QueryClient()
 
 export default function App() {
@@ -23,21 +25,31 @@ export default function App() {
       <ThemeProvider>
         <AuthProvider>
           <BrowserRouter>
-            <div className="min-h-screen flex flex-col bg-canvas-mesh text-text-1 transition-colors duration-200">
-              <Navbar />
-              <main className="flex-grow">
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/blog" element={<Blog />} />
-                  <Route path="/blog/:slug" element={<PostDetail />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/admin" element={<Login />} />
-                  <Route path="/admin/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-                  <Route path="/admin/new-post" element={<ProtectedRoute><NewPost /></ProtectedRoute>} />
-                  <Route path="/admin/edit/:id" element={<ProtectedRoute><EditPost /></ProtectedRoute>} />
-                </Routes>
-              </main>
-              <Footer />
+            <div className="min-h-screen flex flex-col bg-[#f8fafc] dark:bg-[#070b12] text-text-1 transition-colors duration-300 relative overflow-x-hidden">
+              {/* Global Living Particle Cosmos & Ambient Nebula across ALL pages */}
+              <div className="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+                <ParticleCanvas className="w-full h-full" />
+                <div className="absolute -top-32 -right-32 w-[650px] h-[650px] rounded-full bg-indigo-600/15 dark:bg-indigo-600/20 blur-[130px] pointer-events-none" />
+                <div className="absolute top-1/2 -left-32 -translate-y-1/2 w-[550px] h-[550px] rounded-full bg-purple-600/10 dark:bg-purple-600/15 blur-[130px] pointer-events-none" />
+                <div className="absolute -bottom-32 right-1/4 w-[650px] h-[650px] rounded-full bg-cyan-600/10 dark:bg-cyan-600/15 blur-[150px] pointer-events-none" />
+              </div>
+
+              <div className="relative z-10 flex flex-col flex-grow">
+                <Navbar />
+                <main className="flex-grow">
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/blog" element={<Blog />} />
+                    <Route path="/blog/:slug" element={<PostDetail />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/admin" element={<Login />} />
+                    <Route path="/admin/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+                    <Route path="/admin/new-post" element={<ProtectedRoute><NewPost /></ProtectedRoute>} />
+                    <Route path="/admin/edit/:id" element={<ProtectedRoute><EditPost /></ProtectedRoute>} />
+                  </Routes>
+                </main>
+                <Footer />
+              </div>
               <Toaster 
                 position="bottom-right" 
                 toastOptions={{

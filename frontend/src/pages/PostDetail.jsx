@@ -109,49 +109,61 @@ export default function PostDetail() {
 
   return (
     <div className="min-h-screen text-slate-900 dark:text-slate-100 flex flex-col">
-      {/* ── Top Header Banner (Pure White Tier) ── */}
-      <div className="bg-white dark:bg-[#080C14] border-b-2 border-slate-200 dark:border-slate-800/80 py-10 sm:py-14 transition-colors">
-        <div className="max-w-4xl mx-auto px-6">
-          <Link to="/blog" className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white transition-colors mb-6 text-sm font-semibold">
-            <ArrowLeft size={16} />
-            <span>Back to Blog</span>
-          </Link>
+      {/* ── Top Header Banner (Translucent, Global Particles Flowing Behind) ── */}
+      <div className="relative overflow-hidden bg-transparent border-b border-slate-200/60 dark:border-white/5 py-10 sm:py-16 transition-colors">
+        {/* Ambient Glows */}
+        <div className="absolute top-[-100px] right-[-60px] w-[500px] h-[500px] rounded-full bg-indigo-500/15 dark:bg-indigo-600/20 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-[-80px] left-[-40px] w-[450px] h-[450px] rounded-full bg-purple-500/10 dark:bg-purple-600/15 blur-3xl pointer-events-none" />
 
-          <div className="mb-4 inline-block">
-            <Link 
-              to={`/blog?category=${encodeURIComponent(post.category)}`}
-              className="px-3.5 py-1 rounded-full text-xs font-extrabold tracking-wide uppercase transition-transform hover:scale-105 inline-block"
-              style={{ backgroundColor: `${categoryColor}20`, color: categoryColor, border: `1px solid ${categoryColor}40` }}
-            >
-              {post.category}
+        <div className="max-w-4xl mx-auto px-6 relative z-10">
+          {/* Frosted Glass Header Deck */}
+          <div className="glass-card rounded-3xl p-8 sm:p-10 relative overflow-hidden shadow-2xl">
+            {/* Top hairline reflection */}
+            <div className="absolute inset-x-0 top-0 h-px glow-streak pointer-events-none" />
+
+            <Link to="/blog" className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white transition-colors mb-6 text-sm font-semibold">
+              <ArrowLeft size={16} />
+              <span>Back to Blog</span>
             </Link>
-          </div>
 
-          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-950 dark:text-white leading-tight mb-6">
-            {post.title}
-          </h1>
-
-          <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-            <div className="flex items-center gap-6">
-              <div className="flex items-center gap-2 font-medium">
-                <Calendar size={15} className="text-indigo-600 dark:text-indigo-400" />
-                <span>{new Date(post.published_at || post.created_at || Date.now()).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-              </div>
-              <div className="flex items-center gap-2 font-medium">
-                <Clock size={15} className="text-indigo-600 dark:text-indigo-400" />
-                <span>{post.read_time || '5 min'} read</span>
-              </div>
+            <div className="mb-4 inline-block">
+              <Link 
+                to={`/blog?category=${encodeURIComponent(post.category)}`}
+                className="px-3.5 py-1 rounded-full text-xs font-extrabold tracking-wide uppercase transition-transform hover:scale-105 inline-block"
+                style={{ backgroundColor: `${categoryColor}20`, color: categoryColor, border: `1px solid ${categoryColor}40` }}
+              >
+                {post.category}
+              </Link>
             </div>
-            
-            <ShareButtons url={window.location.href} title={post.title} />
+
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-950 dark:text-white leading-tight mb-6">
+              {post.title}
+            </h1>
+
+            <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-200/80 dark:border-white/10 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+              <div className="flex items-center gap-6">
+                <div className="flex items-center gap-2 font-medium">
+                  <Calendar size={15} className="text-indigo-600 dark:text-indigo-400" />
+                  <span>{new Date(post.published_at || post.created_at || Date.now()).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                </div>
+                <div className="flex items-center gap-2 font-medium">
+                  <Clock size={15} className="text-indigo-600 dark:text-indigo-400" />
+                  <span>{post.read_time || '5 min'} read</span>
+                </div>
+              </div>
+              
+              <ShareButtons url={window.location.href} title={post.title} />
+            </div>
           </div>
         </div>
       </div>
 
-      {/* ── Article Content Area (Soft Slate Tier with Elevated White Card) ── */}
-      <div className="flex-1 bg-slate-100/90 dark:bg-[#0d1424] py-12 sm:py-16 transition-colors">
+      {/* ── Article Content Area (Translucent, Frosted Glass Sanctuary Card) ── */}
+      <div className="flex-1 bg-transparent py-12 sm:py-16 transition-colors">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-3xl p-6 sm:p-12 shadow-md">
+          <div className="glass-card rounded-3xl p-6 sm:p-12 relative overflow-hidden shadow-2xl">
+            {/* Top hairline reflection */}
+            <div className="absolute inset-x-0 top-0 h-px glow-streak pointer-events-none" />
             {post.cover_image && (
               <figure className="mb-10 rounded-2xl overflow-hidden shadow-lg border border-slate-200/80 dark:border-slate-800">
                 <img 
@@ -179,7 +191,7 @@ export default function PostDetail() {
             )}
 
             {/* Pinterest Save CTA */}
-            <div className="bg-gradient-to-br from-rose-50 to-orange-50 dark:from-slate-950 dark:to-slate-900 rounded-2xl p-8 border border-rose-200/80 dark:border-slate-800 text-center mb-10 shadow-xs">
+            <div className="bg-rose-50/70 dark:bg-rose-950/20 rounded-2xl p-8 border border-rose-200/70 dark:border-rose-500/20 text-center mb-10 shadow-xs backdrop-blur-xs">
               <h3 className="font-display text-xl font-bold text-slate-950 dark:text-white mb-2">Save this for later!</h3>
               <p className="text-slate-600 dark:text-slate-300 text-sm mb-6">Found this breakdown helpful? Pin it to your boards for quick reference.</p>
               <a 
@@ -194,7 +206,7 @@ export default function PostDetail() {
             </div>
 
             {/* About AIAndBeyond Micro Box */}
-            <div className="bg-slate-50 dark:bg-slate-950 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row gap-6 items-center md:items-start border border-slate-200/90 dark:border-slate-800">
+            <div className="bg-slate-50/70 dark:bg-white/5 backdrop-blur-xs rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row gap-6 items-center md:items-start border border-slate-200/80 dark:border-white/10">
               <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-indigo-600 to-cyan-500 flex items-center justify-center text-white font-extrabold text-xl shadow-md flex-shrink-0">
                 AB
               </div>
@@ -209,9 +221,9 @@ export default function PostDetail() {
         </div>
       </div>
 
-      {/* ── Related Posts Tier (Pure White Tier) ── */}
+      {/* ── Related Posts Tier (Translucent Backdrop) ── */}
       {relatedPosts.length > 0 && (
-        <div className="bg-white dark:bg-[#080C14] border-t-2 border-slate-200 dark:border-slate-800/80 py-16 transition-colors">
+        <div className="bg-slate-100/30 dark:bg-black/20 border-t border-slate-200/60 dark:border-white/5 py-16 transition-colors">
           <div className="max-w-7xl mx-auto px-6">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200/90 dark:border-indigo-800/70 mb-3 shadow-xs">
               KEEP READING

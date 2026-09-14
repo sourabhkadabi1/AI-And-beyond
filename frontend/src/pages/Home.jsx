@@ -92,19 +92,16 @@ export default function Home() {
     <div className="min-h-screen text-slate-900 dark:text-slate-100 transition-colors duration-200">
 
       {/* ═══════════════════════════════════════════════════════
-          HERO SECTION — gradient glow + hero image
+          HERO SECTION — Glassmorphism + Neural Constellation Particles
          ═══════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden pb-12 pt-4 border-b border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-[#080C14]/80 backdrop-blur-md">
-        {/* Subtle Ambient Background Blobs */}
-        <div className="absolute top-[-100px] right-[-60px] w-[500px] h-[500px] rounded-full bg-indigo-500/10 dark:bg-indigo-500/15 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-[-80px] left-[-40px] w-[450px] h-[450px] rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none" />
+      <section className="relative overflow-hidden pb-20 pt-8 sm:pt-12 border-b border-slate-200/60 dark:border-white/5 bg-transparent transition-colors duration-300">
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-24 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 lg:py-20 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             {/* Hero Copy */}
             <div className="lg:col-span-7">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200/90 dark:border-indigo-800/70 text-indigo-700 dark:text-indigo-300 text-xs font-bold mb-6 shadow-sm">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/70 border border-indigo-200/80 dark:border-indigo-800/60 text-indigo-700 dark:text-indigo-300 text-xs font-extrabold tracking-wide mb-6 shadow-xs backdrop-blur-xs">
                 <Rocket className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                 <span>✨ YOUR AI & TECH COMPANION</span>
               </div>
@@ -117,25 +114,25 @@ export default function Home() {
                 Honest reviews, practical tutorials, and curated tech essentials — tailored for students, creators, and professionals striving to stay ahead.
               </p>
 
-              {/* High-Contrast Hero Buttons */}
+              {/* High-Contrast Action Buttons */}
               <div className="flex flex-wrap items-center gap-4 mb-10">
                 <Link 
                   to="/blog" 
-                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-bold rounded-xl transition-all shadow-lg shadow-indigo-600/30 hover:scale-105 active:scale-95 cursor-pointer"
+                  className="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-bold rounded-xl transition-all shadow-lg shadow-indigo-600/30 hover:scale-105 active:scale-95 cursor-pointer"
                 >
                   <span>Read the Blog</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link 
                   to="/blog" 
-                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-white hover:bg-slate-50 text-slate-800 border-2 border-slate-300/90 dark:bg-slate-900 dark:hover:bg-slate-800 dark:text-slate-100 dark:border-slate-700 font-bold rounded-xl transition-all shadow-sm hover:shadow active:scale-95 cursor-pointer"
+                  className="inline-flex items-center gap-2 px-8 py-3.5 glass-card glass-card-hover text-slate-800 dark:text-slate-100 font-bold rounded-xl transition-all active:scale-95 cursor-pointer"
                 >
                   Browse Topics
                 </Link>
               </div>
 
               {/* Trust badges */}
-              <div className="flex flex-wrap items-center gap-6 pt-6 border-t border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300">
+              <div className="flex flex-wrap items-center gap-6 pt-6 border-t border-slate-200/80 dark:border-white/10 text-xs font-semibold text-slate-700 dark:text-slate-300">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                   <span>500+ Curated Articles</span>
@@ -153,8 +150,10 @@ export default function Home() {
 
             {/* Hero Image / Visual Box */}
             <div className="lg:col-span-5 relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 via-cyan-500/15 to-pink-500/15 rounded-3xl blur-2xl scale-105" />
-              <div className="relative w-full aspect-[3/2] rounded-2xl overflow-hidden shadow-2xl border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-center group">
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 via-cyan-500/15 to-purple-500/15 rounded-3xl blur-2xl scale-105 pointer-events-none" />
+              <div className="relative w-full aspect-[3/2] rounded-3xl overflow-hidden shadow-2xl border border-slate-200/90 dark:border-white/10 glass-card flex items-center justify-center group">
+                {/* Top hairline reflection */}
+                <div className="absolute inset-x-0 top-0 h-px glow-streak pointer-events-none z-10" />
                 <img
                   src="/hero.png"
                   alt="AI and Beyond Essentials"
@@ -179,11 +178,12 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           STATS BAR — elevated credibility island (Anti-Glare)
          ═══════════════════════════════════════════════════════ */}
-      <section className="relative -mt-8 sm:-mt-10 mb-8 z-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="rounded-2xl p-4 sm:p-6 bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xl shadow-slate-200/60 dark:shadow-black/40">
+      <section className="relative -mt-10 sm:-mt-12 mb-10 z-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="rounded-3xl p-5 sm:p-7 glass-card relative overflow-hidden shadow-2xl">
+          <div className="absolute inset-x-0 top-0 h-px glow-streak pointer-events-none" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 text-center">
             
-            <div className="p-3.5 sm:p-4 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/40 hover:scale-[1.02] transition-transform">
+            <div className="p-4 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-100/80 dark:border-indigo-800/40 hover:scale-[1.02] transition-transform">
               <div className="w-8 h-8 mx-auto mb-2 rounded-lg bg-indigo-600/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-sm">
                 📚
               </div>
@@ -191,15 +191,15 @@ export default function Home() {
               <p className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 mt-1">Articles Published</p>
             </div>
 
-            <div className="p-3.5 sm:p-4 rounded-xl bg-cyan-50/70 dark:bg-cyan-950/30 border border-cyan-100 dark:border-cyan-900/40 hover:scale-[1.02] transition-transform">
+            <div className="p-4 rounded-2xl bg-cyan-50/60 dark:bg-cyan-950/40 border border-cyan-100/80 dark:border-cyan-800/40 hover:scale-[1.02] transition-transform">
               <div className="w-8 h-8 mx-auto mb-2 rounded-lg bg-cyan-600/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center font-bold text-sm">
                 ⚡
               </div>
-              <p className="font-display text-2xl sm:text-3xl font-extrabold text-cyan-600 dark:text-cyan-400">5</p>
+              <p className="font-display text-2xl sm:text-3xl font-extrabold text-cyan-600 dark:text-cyan-400">6</p>
               <p className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 mt-1">Expert Categories</p>
             </div>
 
-            <div className="p-3.5 sm:p-4 rounded-xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-100 dark:border-amber-900/40 hover:scale-[1.02] transition-transform">
+            <div className="p-4 rounded-2xl bg-amber-50/60 dark:bg-amber-950/40 border border-amber-100/80 dark:border-amber-800/40 hover:scale-[1.02] transition-transform">
               <div className="w-8 h-8 mx-auto mb-2 rounded-lg bg-amber-600/10 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold text-sm">
                 👥
               </div>
@@ -207,7 +207,7 @@ export default function Home() {
               <p className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 mt-1">Monthly Readers</p>
             </div>
 
-            <div className="p-3.5 sm:p-4 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-100 dark:border-emerald-900/40 hover:scale-[1.02] transition-transform">
+            <div className="p-4 rounded-2xl bg-emerald-50/60 dark:bg-emerald-950/40 border border-emerald-100/80 dark:border-emerald-800/40 hover:scale-[1.02] transition-transform">
               <div className="w-8 h-8 mx-auto mb-2 rounded-lg bg-emerald-600/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-sm">
                 🔥
               </div>
@@ -222,7 +222,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           LATEST POSTS — featured articles (Distinct Tinted Section)
          ═══════════════════════════════════════════════════════ */}
-      <section className="py-16 sm:py-24 bg-slate-100/90 dark:bg-[#0d1424] border-b-2 border-slate-200 dark:border-slate-800/80 transition-colors">
+      <section className="py-16 sm:py-24 bg-slate-100/30 dark:bg-black/20 backdrop-blur-xs border-b border-slate-200/60 dark:border-white/5 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-end mb-12">
             <div>
@@ -278,7 +278,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           EXPLORE TOPICS — 3 + 2 layout with image previews (Pure White Section)
          ═══════════════════════════════════════════════════════ */}
-      <section className="py-20 sm:py-24 bg-white dark:bg-[#080C14] border-b-2 border-slate-200 dark:border-slate-800/80 transition-colors">
+      <section className="py-20 sm:py-24 bg-transparent border-b border-slate-200/60 dark:border-white/5 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-200/90 dark:border-purple-800/70 mb-3 shadow-xs">
@@ -295,10 +295,13 @@ export default function Home() {
               <Link
                 key={cat.name}
                 to={`/blog?category=${encodeURIComponent(cat.name)}`}
-                className="group block bg-slate-50/70 hover:bg-white dark:bg-slate-950 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-indigo-500/50 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                className="group block rounded-3xl glass-card glass-card-hover relative overflow-hidden transition-all duration-300"
               >
+                {/* Top hairline reflection */}
+                <div className="absolute inset-x-0 top-0 h-px glow-streak pointer-events-none z-10" />
+
                 {/* Image slot */}
-                <div className="h-44 overflow-hidden relative bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+                <div className="h-44 overflow-hidden relative bg-slate-100/50 dark:bg-slate-900/50 border-b border-slate-200/80 dark:border-white/10">
                   <img 
                     src={cat.image} 
                     alt={cat.name} 
@@ -338,7 +341,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           HOW IT WORKS — 3-step visual workflow (Distinct Tinted Section)
          ═══════════════════════════════════════════════════════ */}
-      <section className="py-20 sm:py-24 bg-slate-100/90 dark:bg-[#0d1424] border-b-2 border-slate-200 dark:border-slate-800/80 transition-colors">
+      <section className="py-20 sm:py-24 bg-slate-100/30 dark:bg-black/20 backdrop-blur-xs border-b border-slate-200/60 dark:border-white/5 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/90 dark:border-emerald-800/70 mb-3 shadow-xs">
@@ -374,8 +377,10 @@ export default function Home() {
             ].map((item) => (
               <div 
                 key={item.step} 
-                className="relative text-center p-8 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                className="relative text-center p-8 rounded-3xl glass-card glass-card-hover overflow-hidden transition-all duration-300"
               >
+                {/* Top hairline reflection */}
+                <div className="absolute inset-x-0 top-0 h-px glow-streak pointer-events-none z-10" />
                 <div 
                   className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full text-xs font-bold text-white shadow-sm"
                   style={{ backgroundColor: item.color }}
@@ -399,7 +404,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           AFFILIATE SPOTLIGHT — with guaranteed button visibility (Pure White Section)
          ═══════════════════════════════════════════════════════ */}
-      <section className="py-20 sm:py-24 bg-white dark:bg-[#080C14] border-b-2 border-slate-200 dark:border-slate-800/80 transition-colors">
+      <section className="py-20 sm:py-24 bg-transparent border-b border-slate-200/60 dark:border-white/5 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-cyan-50 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border border-cyan-200/90 dark:border-cyan-800/70 mb-3 shadow-xs">
@@ -417,10 +422,13 @@ export default function Home() {
               return (
                 <div 
                   key={aff.name} 
-                  className="bg-slate-50/70 hover:bg-white dark:bg-slate-950 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-indigo-500/40 hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col"
+                  className="rounded-3xl glass-card glass-card-hover relative overflow-hidden flex flex-col transition-all duration-300"
                 >
+                  {/* Top hairline reflection */}
+                  <div className="absolute inset-x-0 top-0 h-px glow-streak pointer-events-none z-10" />
+
                   {/* Image slot */}
-                  <div className="h-44 overflow-hidden relative bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+                  <div className="h-44 overflow-hidden relative bg-slate-100/50 dark:bg-slate-900/50 border-b border-slate-200/80 dark:border-white/10">
                     {aff.image ? (
                       <img src={aff.image} alt={aff.name} className="w-full h-full object-cover" />
                     ) : (
@@ -464,23 +472,28 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           TESTIMONIAL / SOCIAL PROOF — with visible avatar (Distinct Tinted Section)
          ═══════════════════════════════════════════════════════ */}
-      <section className="py-20 sm:py-24 bg-slate-100/90 dark:bg-[#0d1424] border-b-2 border-slate-200 dark:border-slate-800/80 transition-colors">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200/90 dark:border-amber-800/70 mb-8 shadow-xs">
-            COMMUNITY TRUST
-          </div>
-          <Quote className="w-10 h-10 text-indigo-600 dark:text-indigo-400 opacity-40 mx-auto mb-6 rotate-180" />
-          <blockquote className="font-display text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white leading-relaxed mb-6">
-            "AIAndBeyond is my go-to hub whenever I need to evaluate software or understand a new AI framework without the marketing hype."
-          </blockquote>
-          <div className="flex items-center justify-center gap-3">
-            {/* Guaranteed Solid Gradient Avatar */}
-            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-600 to-cyan-500 flex items-center justify-center text-white font-extrabold text-sm shadow-md">
-              AB
+      <section className="py-20 sm:py-24 bg-slate-100/30 dark:bg-black/20 backdrop-blur-xs border-b border-slate-200/60 dark:border-white/5 transition-colors">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="glass-card rounded-3xl p-8 sm:p-12 relative overflow-hidden shadow-2xl text-center">
+            {/* Top hairline reflection */}
+            <div className="absolute inset-x-0 top-0 h-px glow-streak pointer-events-none" />
+            
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-extrabold bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200/90 dark:border-amber-800/70 mb-6 shadow-xs">
+              COMMUNITY TRUST
             </div>
-            <div className="text-left">
-              <p className="font-bold text-sm text-slate-900 dark:text-white">Alex Bennett</p>
-              <p className="text-xs text-slate-600 dark:text-slate-400 font-medium">Software Engineer & Tech Creator</p>
+            <Quote className="w-10 h-10 text-indigo-600 dark:text-indigo-400 opacity-40 mx-auto mb-6 rotate-180" />
+            <blockquote className="font-display text-xl sm:text-2xl lg:text-3xl font-bold text-slate-950 dark:text-white leading-relaxed mb-6">
+              "AIAndBeyond is my go-to hub whenever I need to evaluate software or understand a new AI framework without the marketing hype."
+            </blockquote>
+            <div className="flex items-center justify-center gap-3">
+              {/* Guaranteed Solid Gradient Avatar */}
+              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-600 to-cyan-500 flex items-center justify-center text-white font-extrabold text-sm shadow-md">
+                AB
+              </div>
+              <div className="text-left">
+                <p className="font-bold text-sm text-slate-950 dark:text-white">Alex Bennett</p>
+                <p className="text-xs text-slate-600 dark:text-slate-400 font-medium">Software Engineer & Tech Creator</p>
+              </div>
             </div>
           </div>
         </div>
@@ -489,9 +502,11 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           NEWSLETTER SECTION (Pure White Section)
          ═══════════════════════════════════════════════════════ */}
-      <section className="py-20 sm:py-24 bg-white dark:bg-[#080C14] transition-colors">
+      <section className="py-20 sm:py-24 bg-transparent transition-colors">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-br from-indigo-600 via-indigo-700 to-purple-800 text-white rounded-3xl p-8 sm:p-14 text-center relative overflow-hidden shadow-2xl shadow-indigo-600/20 border border-white/10">
+          <div className="bg-gradient-to-br from-indigo-600 via-indigo-700 to-purple-800 text-white rounded-3xl p-8 sm:p-14 text-center relative overflow-hidden shadow-2xl shadow-indigo-600/30 border border-white/20">
+            {/* Top hairline reflection */}
+            <div className="absolute inset-x-0 top-0 h-px glow-streak pointer-events-none" />
             {/* Ambient circular backdrop */}
             <div className="absolute -top-20 -right-20 w-56 h-56 rounded-full bg-white/10 blur-2xl pointer-events-none" />
             <div className="absolute -bottom-20 -left-20 w-56 h-56 rounded-full bg-white/10 blur-2xl pointer-events-none" />

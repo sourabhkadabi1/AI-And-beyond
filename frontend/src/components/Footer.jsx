@@ -3,7 +3,7 @@ import { Zap } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer className="border-t border-dark-border bg-dark-surface mt-20 transition-colors duration-200">
+    <footer className="border-t border-slate-200/60 dark:border-white/5 bg-slate-100/40 dark:bg-black/25 backdrop-blur-md mt-20 transition-colors duration-200">
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="flex flex-col md:flex-row justify-between gap-8">
           <div>
