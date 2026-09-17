@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import DOMPurify from 'dompurify';
 import { fetchPost, fetchPosts } from '../utils/api';
 import ShareButtons from '../components/ShareButtons';
 import VideoEmbed from '../components/VideoEmbed';
@@ -180,7 +181,7 @@ export default function PostDetail() {
               </div>
             )}
 
-            <div className="prose prose-lg max-w-none mb-12 post-content text-slate-800 dark:text-slate-200 leading-relaxed" dangerouslySetInnerHTML={{ __html: post.content }}>
+            <div className="prose prose-lg max-w-none mb-12 post-content text-slate-800 dark:text-slate-200 leading-relaxed" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content, { ADD_TAGS: ['iframe'], ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling', 'src'] }) }}>
               {/* Post content will be injected here */}
             </div>
 

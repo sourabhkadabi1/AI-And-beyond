@@ -1,3 +1,4 @@
+import os
 from fastapi import APIRouter, UploadFile, File, Depends, HTTPException
 from cloudinary_config import upload_image
 from auth import get_current_admin
@@ -13,10 +14,17 @@ async def upload_post_image(
     allowed_types = ["image/jpeg", "image/png", "image/webp", "image/gif"]
     if file.content_type not in allowed_types:
         raise HTTPException(status_code=400, detail="Only JPEG, PNG, WebP, GIF allowed")
+        
+    ext = os.path.splitext(file.filename)[1].lower()
+    if ext not in ('.jpg', '.jpeg', '.png', '.webp', '.gif'):
+        raise HTTPException(status_code=400, detail="Invalid file extension")
     
     file_bytes = await file.read()
     if len(file_bytes) > 10 * 1024 * 1024:
         raise HTTPException(status_code=400, detail="File too large. Max 10MB.")
     
-    result = upload_image(file_bytes)
-    return result
+    try:
+        result = upload_image(file_bytes)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Error uploading image to Cloudinary")
