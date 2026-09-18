@@ -21,17 +21,26 @@ export default function Footer() {
             </p>
           </div>
 
-          <div className="flex gap-12">
+          <div className="flex flex-wrap gap-10 sm:gap-14">
             <div>
               <p className="text-text-1 font-semibold text-sm mb-3">Explore</p>
               <div className="flex flex-col gap-2">
-                {['/', '/blog', '/about'].map((path, i) => (
-                  <Link key={path} to={path} className="text-text-2 text-sm hover:text-accent transition-colors">
-                    {['Home', 'Blog', 'About'][i]}
-                  </Link>
-                ))}
+                <Link to="/" className="text-text-2 text-sm hover:text-accent transition-colors">Home</Link>
+                <Link to="/blog" className="text-text-2 text-sm hover:text-accent transition-colors">Blog</Link>
+                <Link to="/about" className="text-text-2 text-sm hover:text-accent transition-colors">About Us</Link>
+                <Link to="/contact" className="text-text-2 text-sm hover:text-accent transition-colors">Contact</Link>
               </div>
             </div>
+
+            <div>
+              <p className="text-text-1 font-semibold text-sm mb-3">Legal & Trust</p>
+              <div className="flex flex-col gap-2">
+                <Link to="/privacy-policy" className="text-text-2 text-sm hover:text-accent transition-colors">Privacy Policy</Link>
+                <Link to="/affiliate-disclosure" className="text-text-2 text-sm hover:text-accent transition-colors">Affiliate Disclosure</Link>
+                <Link to="/contact" className="text-text-2 text-sm hover:text-accent transition-colors">Editorial Support</Link>
+              </div>
+            </div>
+
             <div>
               <p className="text-text-1 font-semibold text-sm mb-3">Topics</p>
               <div className="flex flex-col gap-2">
@@ -45,11 +54,20 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-dark-border/60 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-text-2">
+        <div className="border-t border-slate-200/80 dark:border-white/10 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-text-2">
           <p>&copy; {new Date().getFullYear()} AIAndBeyond. All rights reserved.</p>
-          <p className="text-center md:text-right">
-            This site contains affiliate links. We may earn a commission at no extra cost to you.
-          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4 text-center md:text-right">
+            <span>
+              This site contains affiliate links. We may earn a commission at no extra cost to you.
+            </span>
+            <Link to="/affiliate-disclosure" className="text-accent hover:underline font-medium">
+              Read Disclosure
+            </Link>
+            <span>·</span>
+            <Link to="/privacy-policy" className="text-accent hover:underline font-medium">
+              Privacy
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

@@ -10,6 +10,9 @@ import Home from './pages/Home'
 import Blog from './pages/Blog'
 import PostDetail from './pages/PostDetail'
 import About from './pages/About'
+import Contact from './pages/Contact'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import AffiliateDisclosure from './pages/AffiliateDisclosure'
 import Login from './pages/admin/Login'
 import Dashboard from './pages/admin/Dashboard'
 import NewPost from './pages/admin/NewPost'
@@ -42,6 +45,9 @@ export default function App() {
                     <Route path="/blog" element={<Blog />} />
                     <Route path="/blog/:slug" element={<PostDetail />} />
                     <Route path="/about" element={<About />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                    <Route path="/affiliate-disclosure" element={<AffiliateDisclosure />} />
                     <Route path="/admin" element={<Login />} />
                     <Route path="/admin/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                     <Route path="/admin/new-post" element={<ProtectedRoute><NewPost /></ProtectedRoute>} />
