@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Zap } from 'lucide-react'
+import { Rocket } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -7,13 +7,13 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="flex flex-col md:flex-row justify-between gap-8">
           <div>
-            <div className="flex items-center gap-2 font-display font-bold text-xl mb-3">
-              <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-accent to-accent-2 flex items-center justify-center text-white shadow-sm">
-                <Zap size={16} fill="currentColor" />
+            <div className="flex items-center gap-2.5 font-display font-bold text-xl mb-3">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-rose-500 flex items-center justify-center text-white shadow-md shadow-rose-500/20">
+                <Rocket size={16} />
               </div>
               <span className="tracking-tight">
-                <span className="text-accent font-extrabold">AI</span>
-                <span className="text-text-1">AndBeyond</span>
+                <span className="bg-gradient-to-r from-purple-500 to-rose-500 dark:from-purple-400 dark:to-rose-400 bg-clip-text text-transparent font-extrabold">AI</span>
+                <span className="text-slate-950 dark:text-white">AndBeyond</span>
               </span>
             </div>
             <p className="text-text-2 text-sm max-w-xs leading-relaxed">

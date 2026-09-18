@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, Zap } from 'lucide-react'
+import { Menu, X, Rocket } from 'lucide-react'
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import ThemeToggle from './ThemeToggle'
@@ -20,14 +20,15 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md transition-colors duration-200">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         
-        {/* Brand Logo with Guaranteed Vibrant Gradient */}
+        {/* Brand Logo with Future Rocket Aesthetic */}
         <Link to="/" className="flex items-center gap-2.5 font-display font-bold text-xl group">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
-            <Zap size={18} fill="currentColor" />
+          <div className="w-8.5 h-8.5 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-rose-500 flex items-center justify-center text-white shadow-md shadow-rose-500/25 group-hover:scale-105 group-hover:shadow-rose-500/40 transition-all duration-300 relative overflow-hidden">
+            <Rocket size={17} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:rotate-12 duration-300" />
+            <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
           </div>
           <span className="tracking-tight">
-            <span className="text-indigo-600 dark:text-indigo-400 font-extrabold">AI</span>
-            <span className="text-slate-900 dark:text-white">AndBeyond</span>
+            <span className="bg-gradient-to-r from-purple-500 to-rose-500 dark:from-purple-400 dark:to-rose-400 bg-clip-text text-transparent font-extrabold">AI</span>
+            <span className="text-slate-950 dark:text-white">AndBeyond</span>
           </span>
         </Link>
 
