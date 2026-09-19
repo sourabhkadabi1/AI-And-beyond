@@ -127,7 +127,7 @@ export default function AffiliateDisclosure() {
                 4. Questions Regarding Affiliates?
               </h2>
               <p className="text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-                If you have any questions regarding our affiliate partnerships, would like to inquire about a product review, or need clarification on a link, please reach out via our <Link to="/contact" className="text-emerald-600 dark:text-emerald-400 underline font-semibold">Contact Page</Link> or email us at <a href="mailto:affiliates@aiandbeyond.com" className="text-emerald-600 dark:text-emerald-400 font-semibold">affiliates@aiandbeyond.com</a>.
+                If you have any questions regarding our affiliate partnerships, would like to inquire about a product review, or need clarification on a link, please reach out via our <Link to="/contact" className="text-emerald-600 dark:text-emerald-400 underline font-semibold">Contact Page</Link> or email us at <a href="mailto:affiliates@aiandbeyondtech.com" className="text-emerald-600 dark:text-emerald-400 font-semibold">affiliates@aiandbeyondtech.com</a>.
               </p>
             </section>
 

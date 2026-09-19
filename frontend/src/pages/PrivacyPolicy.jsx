@@ -60,7 +60,7 @@ export default function PrivacyPolicy() {
                 1. Information We Collect & How We Use It
               </h2>
               <p className="text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-                At <strong className="text-slate-950 dark:text-white">AIAndBeyond</strong> ("we", "us", or "our"), accessible at <span className="text-indigo-600 dark:text-indigo-400 font-medium">aiandbeyond.com</span>, one of our main priorities is the privacy of our visitors.
+                At <strong className="text-slate-950 dark:text-white">AIAndBeyond</strong> ("we", "us", or "our"), accessible at <span className="text-indigo-600 dark:text-indigo-400 font-medium">aiandbeyondtech.com</span>, one of our main priorities is the privacy of our visitors.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                 <div className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-900/60 border border-slate-200/80 dark:border-white/5">
@@ -154,7 +154,7 @@ export default function PrivacyPolicy() {
               </p>
               <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 inline-block text-sm">
                 <p className="font-bold text-slate-950 dark:text-white">AIAndBeyond Privacy Team</p>
-                <p className="text-slate-600 dark:text-slate-400">Email: <a href="mailto:privacy@aiandbeyond.com" className="text-indigo-600 dark:text-indigo-400 font-semibold">privacy@aiandbeyond.com</a></p>
+                <p className="text-slate-600 dark:text-slate-400">Email: <a href="mailto:privacy@aiandbeyondtech.com" className="text-indigo-600 dark:text-indigo-400 font-semibold">privacy@aiandbeyondtech.com</a></p>
                 <p className="text-slate-600 dark:text-slate-400">Website: <Link to="/contact" className="text-indigo-600 dark:text-indigo-400 underline">Contact Page</Link></p>
               </div>
             </section>

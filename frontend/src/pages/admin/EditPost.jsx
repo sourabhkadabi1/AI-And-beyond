@@ -309,7 +309,7 @@ export default function EditPost() {
                     <label className="block text-text-2 text-sm font-medium mb-2">Slug</label>
                     <div className="flex items-center border border-dark-border rounded-lg bg-dark-surface overflow-hidden">
                       <span className="px-3 text-text-2/50 text-sm bg-dark-surface-2 border-r border-dark-border py-3">
-                        aiandbeyond.com/blog/
+                        aiandbeyondtech.com/blog/
                       </span>
                       <input
                         type="text"

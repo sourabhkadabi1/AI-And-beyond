@@ -14,7 +14,7 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
 
-  const contactEmail = "contact@aiandbeyond.com";
+  const contactEmail = "contact@aiandbeyondtech.com";
 
   const handleChange = (e) => {
     const { name, value } = e.target;
