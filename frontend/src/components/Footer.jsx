@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Rocket } from 'lucide-react'
+import { Infinity as InfinityIcon } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -8,11 +8,11 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between gap-8">
           <div>
             <div className="flex items-center gap-2.5 font-display font-bold text-xl mb-3">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-rose-500 flex items-center justify-center text-white shadow-md shadow-rose-500/20">
-                <Rocket size={16} />
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-500 via-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-md shadow-cyan-500/20">
+                <InfinityIcon size={16} strokeWidth={2.4} />
               </div>
               <span className="tracking-tight">
-                <span className="bg-gradient-to-r from-purple-500 to-rose-500 dark:from-purple-400 dark:to-rose-400 bg-clip-text text-transparent font-extrabold">AI</span>
+                <span className="bg-gradient-to-r from-cyan-500 to-indigo-600 dark:from-cyan-400 dark:to-indigo-400 bg-clip-text text-transparent font-extrabold">AI</span>
                 <span className="text-slate-950 dark:text-white">AndBeyond</span>
               </span>
             </div>
