@@ -20,7 +20,7 @@ export default function AffiliateBlock({ affiliate }) {
         <a
           href={affiliate.url}
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noopener noreferrer sponsored"
           className="flex items-center gap-2 px-4 py-2 rounded-lg bg-accent text-white text-sm font-medium hover:bg-accent/90 transition-colors whitespace-nowrap"
         >
           {affiliate.cta}

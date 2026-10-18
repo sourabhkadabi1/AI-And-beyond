@@ -52,6 +52,18 @@ export default function App() {
                     <Route path="/admin/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                     <Route path="/admin/new-post" element={<ProtectedRoute><NewPost /></ProtectedRoute>} />
                     <Route path="/admin/edit/:id" element={<ProtectedRoute><EditPost /></ProtectedRoute>} />
+                    <Route path="*" element={
+                      <div className="min-h-screen flex items-center justify-center">
+                        <div className="text-center glass-card rounded-3xl p-12 max-w-md mx-4">
+                          <h1 className="text-6xl font-extrabold font-display bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent mb-4">404</h1>
+                          <p className="text-xl font-bold text-slate-900 dark:text-white mb-2">Page Not Found</p>
+                          <p className="text-slate-600 dark:text-slate-400 mb-8">The page you're looking for doesn't exist or has been moved.</p>
+                          <a href="/" className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-md">
+                            ← Back to Home
+                          </a>
+                        </div>
+                      </div>
+                    } />
                   </Routes>
                 </main>
                 <Footer />

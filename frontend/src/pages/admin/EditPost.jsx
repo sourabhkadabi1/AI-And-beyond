@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchAdminPosts, updatePost, uploadImage } from '../../utils/api';
+import DOMPurify from 'dompurify';
 import toast from 'react-hot-toast';
 import { Upload, Eye, Send } from 'lucide-react';
 import { useEditor, EditorContent } from '@tiptap/react';
@@ -20,6 +21,14 @@ const MenuBar = ({ editor, onPasteHtml }) => {
     }
   };
 
+  const isValidUrl = (url) => {
+    const trimmed = url.trim().toLowerCase();
+    if (trimmed.startsWith('javascript:') || trimmed.startsWith('data:') || trimmed.startsWith('vbscript:')) {
+      return false;
+    }
+    return /^(https?:\/\/|mailto:|tel:|\/|#)/.test(trimmed) || !trimmed.includes(':');
+  };
+
   const setLink = () => {
     const previousUrl = editor.getAttributes('link').href;
     const url = window.prompt('URL', previousUrl);
@@ -27,6 +36,11 @@ const MenuBar = ({ editor, onPasteHtml }) => {
     if (url === null) return;
     if (url === '') {
       editor.chain().focus().extendMarkRange('link').unsetLink().run();
+      return;
+    }
+    
+    if (!isValidUrl(url)) {
+      toast.error('Invalid URL. Only http/https links are allowed.');
       return;
     }
     
@@ -147,8 +161,8 @@ export default function EditPost() {
         const text = event.clipboardData?.getData('text/plain');
         if (text && /<\/?(p|h1|h2|h3|h4|div|ul|ol|li|blockquote|strong|em|table|hr)\b/i.test(text)) {
           event.preventDefault();
-          editor?.commands.setContent(text, false);
-          toast.success('Pasted HTML converted to rich text!');
+          const sanitized = DOMPurify.sanitize(text);
+          editor?.commands.setContent(sanitized, false);
           return true;
         }
         return false;
@@ -159,8 +173,8 @@ export default function EditPost() {
   const handlePasteHtml = () => {
     const html = window.prompt('Paste HTML code here:');
     if (html !== null && html.trim() !== '') {
-      editor?.commands.setContent(html, false);
-      toast.success('HTML converted to rich formatted text!');
+      const sanitized = DOMPurify.sanitize(html);
+      editor?.commands.setContent(sanitized, false);
     }
   };
 

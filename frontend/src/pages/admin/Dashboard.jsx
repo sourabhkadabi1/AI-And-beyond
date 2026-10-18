@@ -73,9 +73,18 @@ export default function Dashboard() {
       return;
     }
 
+    // Sanitize values to prevent CSV formula injection (=, +, -, @, TAB, CR)
+    const sanitizeCSV = (val) => {
+      const str = String(val);
+      if (/^[=+\-@\t\r]/.test(str)) {
+        return `'${str}`;  // Prefix with single quote to neutralize formula
+      }
+      return str;
+    };
+
     const headers = 'ID,Email,Subscribed Date\n';
     const rows = subscribers
-      .map(s => `${s.id},"${s.email}","${new Date(s.created_at).toISOString()}"`)
+      .map(s => `${s.id},"${sanitizeCSV(s.email)}","${new Date(s.created_at).toISOString()}"`)
       .join('\n');
 
     const blob = new Blob([headers + rows], { type: 'text/csv;charset=utf-8;' });
@@ -86,6 +95,7 @@ export default function Dashboard() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    URL.revokeObjectURL(url);
     toast.success('Subscribers list exported as CSV!');
   };
 

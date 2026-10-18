@@ -455,7 +455,7 @@ export default function Home() {
                     <a
                       href={aff.url}
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel="noopener noreferrer sponsored"
                       className="flex items-center justify-center gap-2 w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs sm:text-sm rounded-xl transition-all shadow-md shadow-indigo-600/25 cursor-pointer active:scale-98"
                     >
                       <span>{aff.cta}</span>

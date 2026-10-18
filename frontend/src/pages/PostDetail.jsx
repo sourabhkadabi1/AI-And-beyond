@@ -181,7 +181,25 @@ export default function PostDetail() {
               </div>
             )}
 
-            <div className="prose prose-lg max-w-none mb-12 post-content text-slate-800 dark:text-slate-200 leading-relaxed" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content, { ADD_TAGS: ['iframe'], ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling', 'src'] }) }}>
+            <div className="prose prose-lg max-w-none mb-12 post-content text-slate-800 dark:text-slate-200 leading-relaxed" dangerouslySetInnerHTML={{ __html: (() => {
+              // Only allow iframes from trusted video domains
+              DOMPurify.addHook('uponSanitizeElement', (node, data) => {
+                if (data.tagName === 'iframe') {
+                  const src = node.getAttribute('src') || '';
+                  const allowed = /^https:\/\/(www\.)?(youtube\.com|youtube-nocookie\.com|player\.vimeo\.com)\//i;
+                  if (!allowed.test(src)) {
+                    node.remove();
+                  }
+                }
+              });
+              const clean = DOMPurify.sanitize(post.content, {
+                ADD_TAGS: ['iframe'],
+                ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling', 'src'],
+                ALLOW_UNKNOWN_PROTOCOLS: false,
+              });
+              DOMPurify.removeHook('uponSanitizeElement');
+              return clean;
+            })() }}>
               {/* Post content will be injected here */}
             </div>
 

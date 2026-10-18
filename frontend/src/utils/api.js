@@ -4,12 +4,35 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000',
 })
 
+// Module-level token storage (not accessible via window/global scope)
+let _authToken = null
+
+export const setAuthToken = (token) => {
+  _authToken = token
+}
+
 api.interceptors.request.use((config) => {
-  if (window.__authToken) {
-    config.headers.Authorization = `Bearer ${window.__authToken}`
+  if (_authToken) {
+    config.headers.Authorization = `Bearer ${_authToken}`
   }
   return config
 })
+
+// Auto-logout on 401 responses (expired/invalid token)
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401 && _authToken) {
+      // Token expired or invalid — clear it
+      _authToken = null
+      // Redirect to login if on admin page
+      if (window.location.pathname.startsWith('/admin') && window.location.pathname !== '/admin') {
+        window.location.href = '/admin'
+      }
+    }
+    return Promise.reject(error)
+  }
+)
 
 export const fetchPosts = (category, search, offset = 0) =>
   api.get('/api/posts', { params: { category, search, offset, limit: 12 } })

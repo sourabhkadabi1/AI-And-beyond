@@ -1,19 +1,27 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, field_validator
 from datetime import datetime
 from typing import Optional, List
+import re
 
 class PostCreate(BaseModel):
-    title: str
-    slug: str
-    content: str
-    excerpt: Optional[str] = None
-    category: str
-    cover_image: Optional[str] = None
-    video_url: Optional[str] = None
-    pinterest_desc: Optional[str] = None
-    meta_desc: Optional[str] = None
-    tags: Optional[str] = None
+    title: str = Field(..., min_length=1, max_length=200)
+    slug: str = Field(..., min_length=1, max_length=200)
+    content: str = Field(..., min_length=1, max_length=500000)
+    excerpt: Optional[str] = Field(None, max_length=500)
+    category: str = Field(..., min_length=1, max_length=50)
+    cover_image: Optional[str] = Field(None, max_length=2000)
+    video_url: Optional[str] = Field(None, max_length=500)
+    pinterest_desc: Optional[str] = Field(None, max_length=500)
+    meta_desc: Optional[str] = Field(None, max_length=160)
+    tags: Optional[str] = Field(None, max_length=500)
     is_published: bool = True
+
+    @field_validator('slug')
+    @classmethod
+    def validate_slug(cls, v):
+        if not re.match(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', v):
+            raise ValueError('Slug must be lowercase alphanumeric with hyphens only')
+        return v
 
 class PostUpdate(PostCreate):
     pass
@@ -52,8 +60,8 @@ class PostSummary(BaseModel):
         from_attributes = True
 
 class LoginRequest(BaseModel):
-    username: str
-    password: str
+    username: str = Field(..., min_length=3, max_length=50)
+    password: str = Field(..., min_length=8, max_length=72)  # bcrypt max is 72 bytes
 
 class TokenResponse(BaseModel):
     access_token: str
@@ -64,7 +72,15 @@ class ImageUploadResponse(BaseModel):
     public_id: str
 
 class SubscriberCreate(BaseModel):
-    email: str
+    email: str = Field(..., min_length=5, max_length=254)
+
+    @field_validator('email')
+    @classmethod
+    def validate_email(cls, v):
+        v = v.strip().lower()
+        if not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', v):
+            raise ValueError('Invalid email address')
+        return v
 
 class SubscriberOut(BaseModel):
     id: int

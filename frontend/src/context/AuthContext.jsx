@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react'
+import { setAuthToken } from '../utils/api'
 
 const AuthContext = createContext()
 
@@ -6,12 +7,12 @@ export function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const login = (token) => {
-    window.__authToken = token
+    setAuthToken(token)
     setIsLoggedIn(true)
   }
 
   const logout = () => {
-    window.__authToken = null
+    setAuthToken(null)
     setIsLoggedIn(false)
   }
 

@@ -8,6 +8,10 @@ from typing import List, Optional
 
 router = APIRouter()
 
+def _escape_like(value: str) -> str:
+    """Escape SQL LIKE wildcards to prevent wildcard injection."""
+    return value.replace('%', r'\%').replace('_', r'\_')
+
 @router.get("/posts", response_model=List[PostSummary])
 def get_posts(
     category: Optional[str] = None,
@@ -20,7 +24,8 @@ def get_posts(
     if category:
         query = query.filter(Post.category == category)
     if search:
-        query = query.filter(Post.title.ilike(f"%{search}%"))
+        safe_search = _escape_like(search)
+        query = query.filter(Post.title.ilike(f"%{safe_search}%"))
     return query.order_by(Post.created_at.desc()).offset(offset).limit(limit).all()
 
 @router.get("/posts/{slug}", response_model=PostOut)
@@ -50,6 +55,10 @@ def update_post(id: int, post: PostUpdate, db: Session = Depends(get_db), admin=
     db_post = db.query(Post).filter(Post.id == id).first()
     if not db_post:
         raise HTTPException(status_code=404, detail="Post not found")
+    # Check slug collision with another post
+    slug_conflict = db.query(Post).filter(Post.slug == post.slug, Post.id != id).first()
+    if slug_conflict:
+        raise HTTPException(status_code=400, detail="Slug already used by another post")
     for key, value in post.dict().items():
         setattr(db_post, key, value)
     db.commit()

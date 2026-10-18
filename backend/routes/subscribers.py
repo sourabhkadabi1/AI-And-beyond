@@ -19,9 +19,10 @@ def subscribe(payload: SubscriberCreate, db: Session = Depends(get_db)):
         
     existing = db.query(Subscriber).filter(Subscriber.email == clean_email).first()
     if existing:
+        # Return same message as success to prevent email enumeration
         return {
-            "status": "exists",
-            "message": "You're already subscribed to AIAndBeyond!"
+            "status": "success",
+            "message": "Thank you for subscribing to AIAndBeyond!"
         }
     
     subscriber = Subscriber(email=clean_email)
