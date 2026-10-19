@@ -72,15 +72,15 @@ export default function About() {
                 </div>
                 <div className="space-y-2 text-center sm:text-left">
                   <div>
-                    <h3 className="font-display text-lg font-bold text-slate-950 dark:text-white">SK_with_Ai</h3>
+                    <h3 className="font-display text-lg font-bold text-slate-950 dark:text-white">SKAiMentor</h3>
                     <p className="text-xs font-semibold text-indigo-600 dark:text-indigo-400">Founder & Lead Editor</p>
                   </div>
                   <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                    Tech builder and researcher passionate about empowering creators with artificial intelligence. SK_with_Ai tests every tool, writes hands-on workflows, and manages the editorial standards of AIAndBeyond to ensure everything published is accurate, safe, and actionable.
+                    Tech builder and researcher passionate about empowering creators with artificial intelligence. SKAiMentor tests every tool, writes hands-on workflows, and manages the editorial standards of AIAndBeyond to ensure everything published is accurate, safe, and actionable.
                   </p>
                   <div className="pt-1">
                     <Link to="/contact" className="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline inline-flex items-center gap-1">
-                      <Mail size={13} /> Get in touch with SK_with_Ai & the team →
+                      <Mail size={13} /> Get in touch with SKAiMentor & the team →
                     </Link>
                   </div>
                 </div>
