@@ -153,7 +153,7 @@ export default function PostDetail() {
                 </div>
               </div>
               
-              <ShareButtons url={window.location.href} title={post.title} />
+              <ShareButtons url={post.slug} title={post.title} image={post.cover_image} />
             </div>
           </div>
         </div>
@@ -214,7 +214,7 @@ export default function PostDetail() {
               <h3 className="font-display text-xl font-bold text-slate-950 dark:text-white mb-2">Save this for later!</h3>
               <p className="text-slate-600 dark:text-slate-300 text-sm mb-6">Found this breakdown helpful? Pin it to your boards for quick reference.</p>
               <a 
-                href={`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(window.location.href)}&description=${encodeURIComponent(post.title)}`}
+                href={`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(window.location.href)}&media=${encodeURIComponent(post.cover_image || '')}&description=${encodeURIComponent(post.pinterest_desc || post.title)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#E60023] hover:bg-[#c9001f] text-white px-7 py-3 rounded-xl font-bold text-sm transition-all shadow-md shadow-rose-600/20 hover:scale-105"

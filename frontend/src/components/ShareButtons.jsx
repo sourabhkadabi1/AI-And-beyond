@@ -1,7 +1,7 @@
 import { Link2, Check } from 'lucide-react'
 import { useState } from 'react'
 
-export default function ShareButtons({ title, url }) {
+export default function ShareButtons({ title, url, image }) {
   const [copied, setCopied] = useState(false)
   const fullUrl = `https://aiandbeyondtech.com/blog/${url}`
 
@@ -11,7 +11,8 @@ export default function ShareButtons({ title, url }) {
     setTimeout(() => setCopied(false), 2000)
   }
 
-  const pinterestUrl = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(fullUrl)}&description=${encodeURIComponent(title)}`
+  const mediaParam = image ? `&media=${encodeURIComponent(image)}` : ''
+  const pinterestUrl = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(fullUrl)}${mediaParam}&description=${encodeURIComponent(title)}`
   const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(fullUrl)}`
 
   return (
