@@ -18,7 +18,10 @@ else:
     DATABASE_URL = DATABASE_URL.strip("'\"")
     # Fix legacy postgres:// prefix (Render or Heroku)
     if DATABASE_URL.startswith("postgres://"):
-        DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+        DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql+psycopg2://", 1)
+    # Ensure we explicitly use psycopg2 driver (not psycopg v3)
+    elif DATABASE_URL.startswith("postgresql://"):
+        DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+psycopg2://", 1)
 
 connect_args = {}
 engine_kwargs = {}
