@@ -3,22 +3,33 @@ import { useNavigate } from 'react-router-dom';
 import { createPost, uploadImage } from '../../utils/api';
 import DOMPurify from 'dompurify';
 import toast from 'react-hot-toast';
-import { Upload, Eye, Send } from 'lucide-react';
+import { Upload, Eye, Send, Image as ImageIcon, Loader2 } from 'lucide-react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
 import TipTapLink from '@tiptap/extension-link';
 
-const MenuBar = ({ editor, onPasteHtml }) => {
+const MenuBar = ({ editor, onPasteHtml, onUploadContentImage, uploadingContentImage }) => {
+  const fileInputRef = React.useRef(null);
+
   if (!editor) {
     return null;
   }
 
-  const addImage = () => {
-    const url = window.prompt('URL');
-    if (url) {
-      editor.chain().focus().setImage({ src: url }).run();
+  const handleImageClick = () => {
+    // Trigger file picker
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
     }
+  };
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files?.[0];
+    if (file && onUploadContentImage) {
+      await onUploadContentImage(file);
+    }
+    // reset input so the same file can be picked again if needed
+    e.target.value = '';
   };
 
   const isValidUrl = (url) => {
@@ -109,12 +120,31 @@ const MenuBar = ({ editor, onPasteHtml }) => {
       >
         Link
       </button>
+      <input
+        type="file"
+        ref={fileInputRef}
+        onChange={handleFileChange}
+        accept="image/*"
+        className="hidden"
+      />
       <button
         type="button"
-        onClick={addImage}
-        className="px-3 py-1.5 rounded-md text-sm font-medium transition-colors bg-dark-surface text-text-2 hover:text-text-1"
+        onClick={handleImageClick}
+        disabled={uploadingContentImage}
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-colors bg-dark-surface text-text-2 hover:text-text-1 hover:bg-dark-surface/80 disabled:opacity-50"
+        title="Upload screenshot/image from your computer"
       >
-        Image
+        {uploadingContentImage ? (
+          <>
+            <Loader2 size={16} className="animate-spin text-accent" />
+            <span>Uploading...</span>
+          </>
+        ) : (
+          <>
+            <ImageIcon size={16} />
+            <span>Image</span>
+          </>
+        )}
       </button>
       <button
         type="button"
@@ -222,6 +252,27 @@ export default function NewPost() {
     }
   };
 
+  const [uploadingContentImage, setUploadingContentImage] = useState(false);
+
+  const handleContentImageUpload = async (file) => {
+    if (!file) return;
+    try {
+      setUploadingContentImage(true);
+      const data = new FormData();
+      data.append('file', file);
+      const response = await uploadImage(data);
+      const result = response.data;
+      if (result && result.url) {
+        editor?.chain().focus().setImage({ src: result.url }).run();
+        toast.success('Image inserted into article!');
+      }
+    } catch (err) {
+      toast.error('Failed to upload image. Please try again.');
+    } finally {
+      setUploadingContentImage(false);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!editor) return;
@@ -290,7 +341,12 @@ export default function NewPost() {
                   <div>
                     <label className="block text-text-2 text-sm font-medium mb-2">Content</label>
                     <div className="border border-dark-border rounded-lg bg-dark-surface overflow-hidden">
-                      <MenuBar editor={editor} onPasteHtml={handlePasteHtml} />
+                      <MenuBar
+                        editor={editor}
+                        onPasteHtml={handlePasteHtml}
+                        onUploadContentImage={handleContentImageUpload}
+                        uploadingContentImage={uploadingContentImage}
+                      />
                       <EditorContent editor={editor} />
                     </div>
                   </div>

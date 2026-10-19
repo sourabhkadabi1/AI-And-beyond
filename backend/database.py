@@ -6,15 +6,31 @@ from sqlalchemy.orm import sessionmaker
 
 load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./aiandbeyond.db")
-if DATABASE_URL.startswith("postgres://"):
-    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+raw_url = os.getenv("DATABASE_URL")
+if not raw_url or not raw_url.strip():
+    DATABASE_URL = "sqlite:///./aiandbeyond.db"
+else:
+    DATABASE_URL = raw_url.strip()
+    # Strip any accidental 'psql ' prefix if copied from Neon CLI snippet
+    if DATABASE_URL.startswith("psql "):
+        DATABASE_URL = DATABASE_URL[5:].strip()
+    # Strip surrounding single or double quotes
+    DATABASE_URL = DATABASE_URL.strip("'\"")
+    # Fix legacy postgres:// prefix (Render or Heroku)
+    if DATABASE_URL.startswith("postgres://"):
+        DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
 connect_args = {}
+engine_kwargs = {}
+
 if DATABASE_URL.startswith("sqlite"):
     connect_args["check_same_thread"] = False
+else:
+    # Automatically verify connection health (crucial for Neon serverless sleeping)
+    engine_kwargs["pool_pre_ping"] = True
+    engine_kwargs["pool_recycle"] = 300
 
-engine = create_engine(DATABASE_URL, connect_args=connect_args)
+engine = create_engine(DATABASE_URL, connect_args=connect_args, **engine_kwargs)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 

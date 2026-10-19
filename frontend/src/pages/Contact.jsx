@@ -186,7 +186,7 @@ export default function Contact() {
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
-                          placeholder="Sourabh Kadabi"
+                          placeholder="Your name"
                           required
                           className="w-full px-4 py-3 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-slate-300/80 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all shadow-xs"
                         />
