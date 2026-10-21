@@ -11,37 +11,37 @@ const CATEGORIES = [
     name: 'AI Tools',
     color: '#5A50EE',
     desc: 'Discover cutting-edge AI software that saves time and boosts creativity',
-    image: '/ai_tools.png'
+    image: '/ai_tools.webp'
   },
   {
     name: 'Web Hosting',
     color: '#0099BB',
     desc: 'Find the perfect hosting platform to launch your website or blog',
-    image: '/web_hosting.png'
+    image: '/web_hosting.webp'
   },
   {
     name: 'AI Agents & Automation',
     color: '#FF8C42',
     desc: 'Next-gen autonomous agents, n8n workflows, and smart business automations',
-    image: '/ai_automation.png'
+    image: '/ai_automation.webp'
   },
   {
     name: 'Tutorials',
     color: '#00B07D',
     desc: 'Step-by-step guides to master new tools and technologies',
-    image: '/tutorials.png'
+    image: '/tutorials.webp'
   },
   {
     name: 'Productivity',
     color: '#FF6B9D',
     desc: 'Smart workflows and apps to get more done in less time',
-    image: '/productivity.png'
+    image: '/productivity.webp'
   },
   {
     name: 'MakeMoneyWithAI',
     color: '#16A34A',
     desc: 'Proven blueprints, side hustles, and monetizing intelligent AI systems',
-    image: '/makemoneywithai.png'
+    image: '/makemoneywithai.webp'
   },
 ]
 
@@ -155,8 +155,10 @@ export default function Home() {
                 {/* Top hairline reflection */}
                 <div className="absolute inset-x-0 top-0 h-px glow-streak pointer-events-none z-10" />
                 <img
-                  src="/hero.png"
+                  src="/hero.webp"
                   alt="AI and Beyond Essentials"
+                  loading="eager"
+                  fetchPriority="high"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none';

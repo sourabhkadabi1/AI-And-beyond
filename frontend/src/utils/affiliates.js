@@ -10,7 +10,7 @@ export const affiliates = {
     cta: "Claim Hosting Deal (Up to 75% Off)",
     // Replace with your Hostinger tracking URL from hostinger.com/affiliates:
     url: "https://www.hostinger.in",
-    image: "/hostinger.png",
+    image: "/hostinger.webp",
     badge: "Top Pick (40-60% Off)",
     category: "Web Hosting"
   },
@@ -21,7 +21,7 @@ export const affiliates = {
     cta: "Try Canva Pro Free",
     // Replace with your Canva affiliate URL:
     url: "https://www.canva.com",
-    image: "/canva.png",
+    image: "/canva.webp",
     badge: "Free 30-Day Trial",
     category: "Design Tools"
   },
@@ -32,7 +32,7 @@ export const affiliates = {
     cta: "Explore Fiverr Marketplace",
     // Replace with your Fiverr affiliate URL:
     url: "https://www.fiverr.com",
-    image: "/fiverr.png",
+    image: "/makemoneywithai.webp",
     badge: "Earn in USD",
     category: "Freelancing"
   },
@@ -43,7 +43,7 @@ export const affiliates = {
     cta: "Get Notion for Free",
     // Replace with your Notion affiliate URL:
     url: "https://www.notion.so",
-    image: "/productivity.png",
+    image: "/productivity.webp",
     badge: "Free Plan Available",
     category: "Productivity"
   },
@@ -54,7 +54,7 @@ export const affiliates = {
     cta: "Browse Free AI Courses",
     // Replace with your Coursera/Impact affiliate URL:
     url: "https://www.coursera.org",
-    image: "/tutorials.png",
+    image: "/tutorials.webp",
     badge: "Free to Audit",
     category: "Learning"
   },
@@ -65,7 +65,7 @@ export const affiliates = {
     cta: "Get NordVPN Protection",
     // Replace with your NordVPN affiliate URL:
     url: "https://nordvpn.com",
-    image: "/nord_vpn.png",
+    image: "/nord_vpn.webp",
     badge: "Editor's Pick",
     category: "Security"
   }
