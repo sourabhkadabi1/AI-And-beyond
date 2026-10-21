@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { createPost, uploadImage } from '../../utils/api';
 import DOMPurify from 'dompurify';
 import toast from 'react-hot-toast';
-import { Upload, Eye, Send, Image as ImageIcon, Loader2 } from 'lucide-react';
+import { Upload, Eye, Send, Image as ImageIcon, Loader2, X } from 'lucide-react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
 import TipTapLink from '@tiptap/extension-link';
+import { TableKit } from '@tiptap/extension-table';
 
 const MenuBar = ({ editor, onPasteHtml, onUploadContentImage, uploadingContentImage }) => {
   const fileInputRef = React.useRef(null);
@@ -175,12 +176,17 @@ export default function NewPost() {
   
   const [uploadingImage, setUploadingImage] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showHtmlModal, setShowHtmlModal] = useState(false);
+  const [htmlInput, setHtmlInput] = useState('');
 
   const editor = useEditor({
     extensions: [
       StarterKit,
       Image,
       TipTapLink.configure({ openOnClick: false }),
+      TableKit.configure({
+        table: { resizable: true },
+      }),
     ],
     content: '',
     editorProps: {
@@ -201,11 +207,17 @@ export default function NewPost() {
   });
 
   const handlePasteHtml = () => {
-    const html = window.prompt('Paste HTML code here:');
-    if (html !== null && html.trim() !== '') {
-      const sanitized = DOMPurify.sanitize(html);
+    setHtmlInput('');
+    setShowHtmlModal(true);
+  };
+
+  const handleApplyHtml = () => {
+    if (htmlInput.trim()) {
+      const sanitized = DOMPurify.sanitize(htmlInput);
       editor?.commands.setContent(sanitized, false);
+      toast.success('HTML formatted content loaded into editor!');
     }
+    setShowHtmlModal(false);
   };
 
   const handleTitleChange = (e) => {
@@ -518,6 +530,50 @@ export default function NewPost() {
           </div>
         </form>
       </div>
+
+      {showHtmlModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+          <div className="bg-dark-surface border border-dark-border rounded-xl w-full max-w-3xl flex flex-col max-h-[85vh] shadow-2xl overflow-hidden">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-dark-border bg-dark-surface-2">
+              <h3 className="text-lg font-bold text-text-1">Paste HTML Content</h3>
+              <button
+                type="button"
+                onClick={() => setShowHtmlModal(false)}
+                className="text-text-2 hover:text-text-1 p-1 rounded-lg transition-colors"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <div className="p-6 flex-1 flex flex-col overflow-hidden">
+              <p className="text-xs text-text-2 mb-2">
+                Paste your full raw HTML code here. Headings, tables, blockquotes, lists, and code blocks will convert into formatted editor content.
+              </p>
+              <textarea
+                value={htmlInput}
+                onChange={(e) => setHtmlInput(e.target.value)}
+                placeholder="<h2>Section Title</h2><p>Paste your HTML content here...</p>"
+                className="w-full flex-1 min-h-[320px] p-4 font-mono text-xs bg-dark-bg border border-dark-border rounded-lg text-text-1 focus:outline-none focus:border-accent resize-none"
+              />
+            </div>
+            <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-dark-border bg-dark-surface-2">
+              <button
+                type="button"
+                onClick={() => setShowHtmlModal(false)}
+                className="px-4 py-2 rounded-lg text-sm text-text-2 hover:text-text-1 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleApplyHtml}
+                className="px-5 py-2 rounded-lg text-sm font-semibold bg-accent text-white hover:bg-accent/90 transition-colors"
+              >
+                Apply HTML to Editor
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
