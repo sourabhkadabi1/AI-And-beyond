@@ -60,3 +60,8 @@ app.include_router(subscribers_router, prefix="/api")
 @app.get("/")
 def root():
     return {"message": "AIAndBeyond API is running"}
+
+@app.get("/health")
+def health():
+    return "ok"
+
