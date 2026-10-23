@@ -39,6 +39,13 @@ def get_post(slug: str, db: Session = Depends(get_db)):
 def get_all_posts_admin(db: Session = Depends(get_db), admin=Depends(get_current_admin)):
     return db.query(Post).order_by(Post.created_at.desc()).all()
 
+@router.get("/admin/posts/{id}", response_model=PostOut)
+def get_post_admin(id: int, db: Session = Depends(get_db), admin=Depends(get_current_admin)):
+    db_post = db.query(Post).filter(Post.id == id).first()
+    if not db_post:
+        raise HTTPException(status_code=404, detail="Post not found")
+    return db_post
+
 @router.post("/admin/posts", response_model=PostOut)
 def create_post(post: PostCreate, db: Session = Depends(get_db), admin=Depends(get_current_admin)):
     existing = db.query(Post).filter(Post.slug == post.slug).first()

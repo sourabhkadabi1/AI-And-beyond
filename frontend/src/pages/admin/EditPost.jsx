@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchAdminPosts, updatePost, uploadImage } from '../../utils/api';
+import { fetchAdminPosts, fetchAdminPost, fetchPost, updatePost, uploadImage } from '../../utils/api';
 import DOMPurify from 'dompurify';
 import toast from 'react-hot-toast';
 import { Upload, Eye, Send, Image as ImageIcon, Loader2, X } from 'lucide-react';
@@ -176,6 +176,7 @@ export default function EditPost() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showHtmlModal, setShowHtmlModal] = useState(false);
   const [htmlInput, setHtmlInput] = useState('');
+  const [initialContent, setInitialContent] = useState('');
 
   const editor = useEditor({
     extensions: [
@@ -222,10 +223,37 @@ export default function EditPost() {
     const loadPost = async () => {
       try {
         setLoading(true);
-        const res = await fetchAdminPosts();
-        const posts = res.data || [];
-        const post = posts.find(p => p.id === parseInt(id) || p.id === id);
-        
+        let post = null;
+
+        // 1. Try dedicated single post endpoint
+        try {
+          const singleRes = await fetchAdminPost(id);
+          if (singleRes?.data) {
+            post = singleRes.data;
+          }
+        } catch {
+          // Fallback to list search if single endpoint is not yet live
+        }
+
+        // 2. Fallback to admin posts list
+        if (!post) {
+          const res = await fetchAdminPosts();
+          const posts = res.data || [];
+          post = posts.find(p => p.id === parseInt(id) || p.id === id);
+        }
+
+        // 3. Fallback to public post by slug to guarantee we get full content
+        if (post && (!post.content || post.content.trim() === '')) {
+          try {
+            const publicRes = await fetchPost(post.slug);
+            if (publicRes?.data?.content) {
+              post.content = publicRes.data.content;
+            }
+          } catch {
+            // Post might be draft/unpublished
+          }
+        }
+
         if (post) {
           setFormData({
             title: post.title || '',
@@ -239,15 +267,18 @@ export default function EditPost() {
             tags: post.tags || '',
             is_published: post.is_published !== false
           });
-          
-          if (editor && post.content) {
-            editor.commands.setContent(post.content);
+
+          if (post.content) {
+            setInitialContent(post.content);
+            if (editor && !editor.isDestroyed) {
+              editor.commands.setContent(post.content, false);
+            }
           }
         } else {
           toast.error('Post not found');
           navigate('/admin/dashboard');
         }
-      } catch (err) {
+      } catch {
         toast.error('Failed to load post');
       } finally {
         setLoading(false);
@@ -257,7 +288,16 @@ export default function EditPost() {
     if (id) {
       loadPost();
     }
-  }, [id, editor, navigate]);
+  }, [id, navigate]);
+
+  // Synchronize editor whenever editor becomes ready or initialContent arrives
+  useEffect(() => {
+    if (editor && initialContent && !editor.isDestroyed) {
+      if (editor.isEmpty || editor.getHTML() === '<p></p>') {
+        editor.commands.setContent(initialContent, false);
+      }
+    }
+  }, [editor, initialContent]);
 
   const handleTitleChange = (e) => {
     const title = e.target.value;
@@ -328,12 +368,18 @@ export default function EditPost() {
     e.preventDefault();
     if (!editor) return;
 
+    const editorHtml = editor.getHTML();
+    if (!editorHtml || editorHtml.trim() === '' || editorHtml === '<p></p>') {
+      toast.error('Post content is empty! Please write or paste your content before saving.');
+      return;
+    }
+
     try {
       setIsSubmitting(true);
       
       const postData = {
         ...formData,
-        content: editor.getHTML(),
+        content: editorHtml,
       };
 
       await updatePost(id, postData);

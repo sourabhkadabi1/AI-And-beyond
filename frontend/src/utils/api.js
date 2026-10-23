@@ -41,6 +41,8 @@ export const fetchPost = (slug) => api.get(`/api/posts/${slug}`)
 
 export const fetchAdminPosts = () => api.get('/api/admin/posts')
 
+export const fetchAdminPost = (id) => api.get(`/api/admin/posts/${id}`)
+
 export const createPost = (data) => api.post('/api/admin/posts', data)
 
 export const updatePost = (id, data) => api.put(`/api/admin/posts/${id}`, data)
