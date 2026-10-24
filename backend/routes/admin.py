@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request, Header
 from sqlalchemy.orm import Session
 from database import get_db
 from models import Admin
-from schemas import LoginRequest, TokenResponse
+from schemas import LoginRequest, TokenResponse, PasswordResetRequest
 from auth import create_access_token, hash_password, verify_password_or_dummy
 import os
 import time
@@ -99,3 +99,37 @@ def setup_admin(
     db.add(admin)
     db.commit()
     return {"message": "Admin created successfully"}
+
+@router.post("/auth/reset-password")
+def reset_admin_password(
+    reset_req: PasswordResetRequest,
+    x_setup_key: str = Header(None),
+    db: Session = Depends(get_db)
+):
+    """Secure password reset using SETUP_SECRET_KEY."""
+    setup_secret = os.getenv("SETUP_SECRET_KEY")
+    if not setup_secret:
+        raise HTTPException(
+            status_code=403,
+            detail="Admin reset is disabled. Set SETUP_SECRET_KEY in your environment."
+        )
+
+    if not x_setup_key or not secrets.compare_digest(x_setup_key, setup_secret):
+        raise HTTPException(status_code=403, detail="Forbidden: Invalid setup key")
+
+    admin = db.query(Admin).filter(Admin.username == reset_req.username).first()
+    if not admin:
+        admin = db.query(Admin).first()
+
+    if not admin:
+        admin = Admin(
+            username=reset_req.username,
+            password_hash=hash_password(reset_req.new_password)
+        )
+        db.add(admin)
+        db.commit()
+        return {"message": f"Admin account '{admin.username}' created successfully"}
+
+    admin.password_hash = hash_password(reset_req.new_password)
+    db.commit()
+    return {"message": f"Password for '{admin.username}' reset successfully"}

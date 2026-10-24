@@ -63,6 +63,10 @@ class LoginRequest(BaseModel):
     username: str = Field(..., min_length=3, max_length=50)
     password: str = Field(..., min_length=8, max_length=72)  # bcrypt max is 72 bytes
 
+class PasswordResetRequest(BaseModel):
+    username: str = Field(..., min_length=1, max_length=50)
+    new_password: str = Field(..., min_length=6, max_length=72)
+
 class TokenResponse(BaseModel):
     access_token: str
     token_type: str
