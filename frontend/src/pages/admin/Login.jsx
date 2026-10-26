@@ -29,7 +29,8 @@ export default function Login() {
         throw new Error("Invalid response format");
       }
     } catch (err) {
-      setError(err.response?.data?.message || 'Invalid username or password');
+      const serverError = err.response?.data?.detail || err.response?.data?.message;
+      setError(serverError || 'Invalid username or password');
       setShake(true);
       setTimeout(() => setShake(false), 300);
     }
