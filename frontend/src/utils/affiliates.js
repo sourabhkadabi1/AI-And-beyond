@@ -19,8 +19,8 @@ export const affiliates = {
     tagline: "Design viral Pinterest pins and social graphics",
     description: "Access 100M+ premium templates, 1-click background remover, bulk create, and social scheduling. Free trial included.",
     cta: "Try Canva Pro Free",
-    // Replace with your Canva affiliate URL:
-    url: "https://www.canva.com",
+    // Canva Pro URL:
+    url: "https://www.canva.com/pro/",
     image: "/canva.webp",
     badge: "Free 30-Day Trial",
     category: "Design Tools"

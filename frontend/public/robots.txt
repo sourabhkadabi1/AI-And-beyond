@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aiandbeyondtech.com/sitemap.xml
-
-
+Sitemap: https://www.aiandbeyondtech.com/sitemap.xml
