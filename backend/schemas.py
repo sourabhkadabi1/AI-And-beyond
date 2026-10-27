@@ -6,22 +6,23 @@ import re
 class PostCreate(BaseModel):
     title: str = Field(..., min_length=1, max_length=200)
     slug: str = Field(..., min_length=1, max_length=200)
-    content: str = Field(..., min_length=1, max_length=500000)
+    content: str = Field(default="", max_length=500000)
     excerpt: Optional[str] = Field(None, max_length=500)
     category: str = Field(..., min_length=1, max_length=50)
     cover_image: Optional[str] = Field(None, max_length=2000)
     video_url: Optional[str] = Field(None, max_length=500)
     pinterest_desc: Optional[str] = Field(None, max_length=500)
-    meta_desc: Optional[str] = Field(None, max_length=160)
+    meta_desc: Optional[str] = Field(None, max_length=300)
     tags: Optional[str] = Field(None, max_length=500)
     is_published: bool = True
 
     @field_validator('slug')
     @classmethod
     def validate_slug(cls, v):
-        if not re.match(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', v):
-            raise ValueError('Slug must be lowercase alphanumeric with hyphens only')
-        return v
+        cleaned = re.sub(r'[^a-z0-9]+', '-', v.strip().lower()).strip('-')
+        if not cleaned:
+            raise ValueError('Slug must contain at least one alphanumeric character')
+        return cleaned
 
 class PostUpdate(PostCreate):
     pass

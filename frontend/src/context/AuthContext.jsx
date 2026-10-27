@@ -4,7 +4,13 @@ import { setAuthToken } from '../utils/api'
 const AuthContext = createContext()
 
 export function AuthProvider({ children }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    try {
+      return Boolean(localStorage.getItem('admin_token'))
+    } catch {
+      return false
+    }
+  })
 
   const login = (token) => {
     setAuthToken(token)

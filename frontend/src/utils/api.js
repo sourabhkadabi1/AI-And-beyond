@@ -4,11 +4,21 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000',
 })
 
-// Module-level token storage (not accessible via window/global scope)
+// Module-level token storage with safe localStorage fallback
 let _authToken = null
+try {
+  _authToken = localStorage.getItem('admin_token')
+} catch {}
 
 export const setAuthToken = (token) => {
   _authToken = token
+  try {
+    if (token) {
+      localStorage.setItem('admin_token', token)
+    } else {
+      localStorage.removeItem('admin_token')
+    }
+  } catch {}
 }
 
 api.interceptors.request.use((config) => {

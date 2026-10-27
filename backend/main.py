@@ -1,8 +1,10 @@
 import os
 from dotenv import load_dotenv
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Request, Response, Depends
 from fastapi.middleware.cors import CORSMiddleware
-from database import Base, engine
+from sqlalchemy import text
+from sqlalchemy.orm import Session
+from database import Base, engine, get_db
 from models import Post, Admin, Subscriber
 from routes.posts import router as posts_router
 from routes.admin import router as admin_router
@@ -62,6 +64,12 @@ def root():
     return {"message": "AIAndBeyond API is running"}
 
 @app.get("/health")
-def health():
+def health(wake_db: bool = False, db: Session = Depends(get_db)):
+    if wake_db:
+        try:
+            db.execute(text("SELECT 1"))
+            return {"status": "ok", "db": "awake"}
+        except Exception as e:
+            return {"status": "ok", "db": f"error: {str(e)}"}
     return "ok"
 

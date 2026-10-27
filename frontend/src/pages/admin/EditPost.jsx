@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { fetchAdminPosts, fetchAdminPost, fetchPost, updatePost, uploadImage } from '../../utils/api';
 import DOMPurify from 'dompurify';
 import toast from 'react-hot-toast';
-import { Upload, Eye, Send, Image as ImageIcon, Loader2, X } from 'lucide-react';
+import { Upload, Eye, EyeOff, Send, Image as ImageIcon, Loader2, X, Save } from 'lucide-react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
@@ -364,13 +364,19 @@ export default function EditPost() {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSave = async (publishStatus = null) => {
     if (!editor) return;
 
+    if (!formData.title?.trim()) {
+      toast.error('Please enter a post title before saving.');
+      return;
+    }
+
     const editorHtml = editor.getHTML();
-    if (!editorHtml || editorHtml.trim() === '' || editorHtml === '<p></p>') {
-      toast.error('Post content is empty! Please write or paste your content before saving.');
+    const isPub = publishStatus !== null ? publishStatus : formData.is_published;
+
+    if (isPub && (!editorHtml || editorHtml.trim() === '' || editorHtml === '<p></p>')) {
+      toast.error('Post content is empty! Please write or paste your content before publishing.');
       return;
     }
 
@@ -379,17 +385,33 @@ export default function EditPost() {
       
       const postData = {
         ...formData,
-        content: editorHtml,
+        is_published: isPub,
+        content: editorHtml || '',
       };
 
       await updatePost(id, postData);
-      toast.success('Post updated successfully!');
+      toast.success(isPub ? 'Post published successfully!' : 'Draft updated successfully!');
       navigate('/admin/dashboard');
     } catch (err) {
-      toast.error('Failed to update post. Please try again.');
+      console.error('Update post error:', err);
+      const detail = err.response?.data?.detail;
+      let errorMsg = 'Failed to update post. Please check backend connection.';
+      if (typeof detail === 'string') {
+        errorMsg = detail;
+      } else if (Array.isArray(detail) && detail[0]?.msg) {
+        errorMsg = `${detail[0].loc?.slice(1).join('.') || 'Field'}: ${detail[0].msg}`;
+      } else if (err.message) {
+        errorMsg = err.message;
+      }
+      toast.error(errorMsg);
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleSave();
   };
 
   if (loading) {
@@ -483,7 +505,24 @@ export default function EditPost() {
                 
                 <div className="space-y-5">
                   <div className="flex items-center justify-between">
-                    <span className="text-text-2 text-sm font-medium">Status</span>
+                    <div>
+                      <span className="text-text-2 text-sm font-medium block">Current Status</span>
+                      <span className="text-xs text-text-2/60">
+                        {formData.is_published ? 'Visible to public' : 'Hidden from public (Draft)'}
+                      </span>
+                    </div>
+                    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${
+                      formData.is_published 
+                        ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' 
+                        : 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+                    }`}>
+                      {formData.is_published ? <Eye size={12} /> : <EyeOff size={12} />}
+                      {formData.is_published ? 'Published' : 'Draft'}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-2 border-t border-dark-border/50">
+                    <span className="text-text-2 text-xs font-medium">Publish on save</span>
                     <label className="relative inline-flex items-center cursor-pointer">
                       <input
                         type="checkbox"
@@ -496,20 +535,25 @@ export default function EditPost() {
                     </label>
                   </div>
                   
-                  <div className="pt-4 border-t border-dark-border">
+                  <div className="pt-4 border-t border-dark-border space-y-2.5">
                     <button
-                      type="submit"
+                      type="button"
+                      onClick={() => handleSave(true)}
                       disabled={isSubmitting}
-                      className="w-full flex justify-center items-center gap-2 bg-accent hover:bg-accent/90 text-white py-3 rounded-lg font-medium transition-colors disabled:opacity-50"
+                      className="w-full flex justify-center items-center gap-2 bg-accent hover:bg-accent/90 text-white py-3 rounded-lg font-medium transition-colors disabled:opacity-50 cursor-pointer"
                     >
-                      {isSubmitting ? (
-                        'Saving...'
-                      ) : (
-                        <>
-                          <Send size={18} />
-                          Save Changes
-                        </>
-                      )}
+                      <Send size={18} />
+                      <span>{isSubmitting ? 'Saving...' : (formData.is_published ? 'Update & Keep Published' : 'Publish Post')}</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => handleSave(false)}
+                      disabled={isSubmitting}
+                      className="w-full flex justify-center items-center gap-2 bg-dark-surface hover:bg-dark-surface/80 text-amber-400 border border-amber-500/30 py-2.5 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 cursor-pointer"
+                    >
+                      <Save size={16} />
+                      <span>{formData.is_published ? 'Switch to Draft (Unpublish)' : 'Save Draft Changes'}</span>
                     </button>
                   </div>
                 </div>
