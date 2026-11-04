@@ -48,24 +48,88 @@ export default function PostDetail() {
           setRelatedPosts(filtered);
         }
 
-        // Set Meta Tags
+        // Set Meta Tags & Google Indexing Directives
         document.title = `${data.title} | AIAndBeyond`;
         
-        const setMetaTag = (property, content) => {
-          let tag = document.querySelector(`meta[property="${property}"]`);
+        const setMetaTag = (attr, name, content) => {
+          let tag = document.querySelector(`meta[${attr}="${name}"]`);
           if (!tag) {
             tag = document.createElement('meta');
-            tag.setAttribute('property', property);
+            tag.setAttribute(attr, name);
             document.head.appendChild(tag);
           }
           tag.setAttribute('content', content);
         };
 
-        setMetaTag('og:title', data.title);
-        setMetaTag('og:description', data.excerpt || '');
-        if (data.cover_image) {
-          setMetaTag('og:image', data.cover_image);
+        const postUrl = `https://www.aiandbeyondtech.com/blog/${slug}`;
+        const postDesc = data.meta_desc || data.excerpt || '';
+
+        // Standard SEO Meta
+        setMetaTag('name', 'description', postDesc);
+        setMetaTag('name', 'robots', 'index, follow, max-image-preview:large, max-snippet:-1');
+        setMetaTag('name', 'googlebot', 'index, follow, max-snippet:-1, max-image-preview:large');
+
+        // Canonical Link
+        let canonicalTag = document.querySelector('link[rel="canonical"]');
+        if (!canonicalTag) {
+          canonicalTag = document.createElement('link');
+          canonicalTag.setAttribute('rel', 'canonical');
+          document.head.appendChild(canonicalTag);
         }
+        canonicalTag.setAttribute('href', postUrl);
+
+        // Open Graph
+        setMetaTag('property', 'og:title', data.title);
+        setMetaTag('property', 'og:description', postDesc);
+        setMetaTag('property', 'og:url', postUrl);
+        setMetaTag('property', 'og:type', 'article');
+        setMetaTag('property', 'og:site_name', 'AIAndBeyond');
+        if (data.cover_image) {
+          setMetaTag('property', 'og:image', data.cover_image);
+        }
+
+        // Twitter Cards
+        setMetaTag('name', 'twitter:card', 'summary_large_image');
+        setMetaTag('name', 'twitter:title', data.title);
+        setMetaTag('name', 'twitter:description', postDesc);
+        if (data.cover_image) {
+          setMetaTag('name', 'twitter:image', data.cover_image);
+        }
+
+        // Google Article Structured Data (JSON-LD)
+        let schemaTag = document.getElementById('schema-article');
+        if (!schemaTag) {
+          schemaTag = document.createElement('script');
+          schemaTag.id = 'schema-article';
+          schemaTag.type = 'application/ld+json';
+          document.head.appendChild(schemaTag);
+        }
+        schemaTag.textContent = JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": data.title,
+          "description": postDesc,
+          "image": data.cover_image || "https://www.aiandbeyondtech.com/hero.png",
+          "datePublished": data.published_at || data.created_at || "2026-11-04",
+          "dateModified": data.updated_at || data.published_at || data.created_at || "2026-11-04",
+          "author": {
+            "@type": "Organization",
+            "name": "AIAndBeyond",
+            "url": "https://www.aiandbeyondtech.com"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "AIAndBeyond",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.aiandbeyondtech.com/favicon.svg"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": postUrl
+          }
+        });
       } catch (err) {
         console.error('Error loading post:', err);
         setError('Failed to load post');
