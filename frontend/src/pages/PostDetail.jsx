@@ -198,7 +198,21 @@ export default function PostDetail() {
                 ALLOW_UNKNOWN_PROTOCOLS: false,
               });
               DOMPurify.removeHook('uponSanitizeElement');
-              return clean;
+
+              // Guarantee 100% Mobile Responsive Tables on all devices
+              let responsiveContent = clean;
+              // Strip legacy wrapper divs if they exist to avoid double wrapping
+              responsiveContent = responsiveContent.replace(
+                /<div[^>]*style="[^"]*overflow-x:\s*auto[^"]*"[^>]*>\s*(<table[\s\S]*?<\/table>)\s*<\/div>/gi,
+                '$1'
+              );
+              // Wrap every table with our dedicated touch-scrollable container & mobile hint
+              responsiveContent = responsiveContent.replace(
+                /(<table\b[^>]*>[\s\S]*?<\/table>)/gi,
+                '<div class="table-container-responsive"><div class="table-scroll-hint sm:hidden"><span>↔ Swipe table horizontally</span></div>$1</div>'
+              );
+
+              return responsiveContent;
             })() }}>
               {/* Post content will be injected here */}
             </div>
