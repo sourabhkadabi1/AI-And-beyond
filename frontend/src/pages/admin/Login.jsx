@@ -85,7 +85,7 @@ export default function Login() {
           </div>
           <button
             type="submit"
-            className="w-full bg-accent hover:bg-accent/90 text-white font-medium py-3 rounded-lg transition-colors mt-2"
+            className="w-full bg-[#F5A623] hover:bg-[#e09510] text-black font-bold py-3 rounded-lg transition-colors mt-2"
           >
             Sign In
           </button>

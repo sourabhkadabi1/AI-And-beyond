@@ -18,8 +18,6 @@ import Dashboard from './pages/admin/Dashboard'
 import NewPost from './pages/admin/NewPost'
 import EditPost from './pages/admin/EditPost'
 
-import ParticleCanvas from './components/ParticleCanvas'
-
 const queryClient = new QueryClient()
 
 export default function App() {
@@ -28,46 +26,36 @@ export default function App() {
       <ThemeProvider>
         <AuthProvider>
           <BrowserRouter>
-            <div className="min-h-screen flex flex-col bg-[#f8fafc] dark:bg-[#070b12] text-text-1 transition-colors duration-300 relative overflow-x-hidden">
-              {/* Global Living Particle Cosmos & Ambient Nebula across ALL pages */}
-              <div className="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden" aria-hidden="true">
-                <ParticleCanvas className="w-full h-full" />
-                <div className="absolute -top-32 -right-32 w-[650px] h-[650px] rounded-full bg-indigo-600/15 dark:bg-indigo-600/20 blur-[130px] pointer-events-none" />
-                <div className="absolute top-1/2 -left-32 -translate-y-1/2 w-[550px] h-[550px] rounded-full bg-purple-600/10 dark:bg-purple-600/15 blur-[130px] pointer-events-none" />
-                <div className="absolute -bottom-32 right-1/4 w-[650px] h-[650px] rounded-full bg-cyan-600/10 dark:bg-cyan-600/15 blur-[150px] pointer-events-none" />
-              </div>
-
-              <div className="relative z-10 flex flex-col flex-grow">
-                <Navbar />
-                <main className="flex-grow">
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/blog" element={<Blog />} />
-                    <Route path="/blog/:slug" element={<PostDetail />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                    <Route path="/affiliate-disclosure" element={<AffiliateDisclosure />} />
-                    <Route path="/admin" element={<Login />} />
-                    <Route path="/admin/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-                    <Route path="/admin/new-post" element={<ProtectedRoute><NewPost /></ProtectedRoute>} />
-                    <Route path="/admin/edit/:id" element={<ProtectedRoute><EditPost /></ProtectedRoute>} />
-                    <Route path="*" element={
-                      <div className="min-h-screen flex items-center justify-center">
-                        <div className="text-center glass-card rounded-3xl p-12 max-w-md mx-4">
-                          <h1 className="text-6xl font-extrabold font-display bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent mb-4">404</h1>
-                          <p className="text-xl font-bold text-slate-900 dark:text-white mb-2">Page Not Found</p>
-                          <p className="text-slate-600 dark:text-slate-400 mb-8">The page you're looking for doesn't exist or has been moved.</p>
-                          <a href="/" className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-md">
-                            ← Back to Home
-                          </a>
-                        </div>
+            <div className="min-h-screen flex flex-col bg-[#FAFAFA] dark:bg-[#0A0A0A] text-text-1 transition-colors duration-200">
+              <Navbar />
+              <main className="flex-grow">
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/blog/:slug" element={<PostDetail />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                  <Route path="/affiliate-disclosure" element={<AffiliateDisclosure />} />
+                  <Route path="/admin" element={<Login />} />
+                  <Route path="/admin/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+                  <Route path="/admin/new-post" element={<ProtectedRoute><NewPost /></ProtectedRoute>} />
+                  <Route path="/admin/edit/:id" element={<ProtectedRoute><EditPost /></ProtectedRoute>} />
+                  <Route path="*" element={
+                    <div className="min-h-screen flex items-center justify-center">
+                      <div className="text-center bg-white dark:bg-[#141414] border border-[#E5E5E5] dark:border-[#262626] rounded-[10px] p-12 max-w-md mx-4">
+                        <h1 className="text-6xl font-extrabold font-display text-[#F5A623] mb-4">404</h1>
+                        <p className="text-xl font-bold text-[#111111] dark:text-white mb-2">Page Not Found</p>
+                        <p className="text-[#555555] dark:text-[#A0A0A0] mb-8">The page you're looking for doesn't exist or has been moved.</p>
+                        <a href="/" className="inline-flex items-center gap-2 bg-[#F5A623] hover:bg-[#E09915] text-[#111111] px-6 py-3 rounded-lg font-bold text-sm transition-colors shadow-sm">
+                          ← Back to Home
+                        </a>
                       </div>
-                    } />
-                  </Routes>
-                </main>
-                <Footer />
-              </div>
+                    </div>
+                  } />
+                </Routes>
+              </main>
+              <Footer />
               <Toaster 
                 position="bottom-right" 
                 toastOptions={{
@@ -75,7 +63,7 @@ export default function App() {
                     background: 'var(--bg-surface)', 
                     color: 'var(--text-primary)', 
                     border: '1px solid var(--border-color)',
-                    boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)'
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)'
                   }
                 }} 
               />

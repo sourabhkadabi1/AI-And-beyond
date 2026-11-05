@@ -7,17 +7,15 @@ export default function ThemeToggle({ className = '' }) {
   return (
     <button
       onClick={toggle}
-      className={`relative inline-flex items-center justify-center p-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all duration-200 shadow-sm active:scale-95 ${className}`}
+      className={`inline-flex items-center justify-center p-2 rounded-lg border border-[#E5E5E5] dark:border-[#262626] bg-[#F5F5F5] hover:bg-[#E5E5E5] dark:bg-[#1C1C1C] dark:hover:bg-[#262626] text-[#555555] dark:text-[#A0A0A0] transition-colors duration-200 ${className}`}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
     >
-      <div className="w-5 h-5 flex items-center justify-center">
-        {isDark ? (
-          <Sun className="w-4 h-4 text-amber-400 transform rotate-0 scale-100 transition-all duration-300" />
-        ) : (
-          <Moon className="w-4 h-4 text-indigo-600 transform rotate-0 scale-100 transition-all duration-300" />
-        )}
-      </div>
+      {isDark ? (
+        <Sun className="w-4 h-4 text-[#F5A623]" />
+      ) : (
+        <Moon className="w-4 h-4 text-[#555555]" />
+      )}
     </button>
   )
 }

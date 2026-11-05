@@ -1,51 +1,45 @@
 import { Link } from 'react-router-dom'
-import { Infinity as InfinityIcon } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer className="border-t border-slate-200/60 dark:border-white/5 bg-slate-100/40 dark:bg-black/25 backdrop-blur-md mt-20 transition-colors duration-200">
+    <footer className="border-t border-[#E5E5E5] dark:border-[#262626] bg-[#F5F5F5] dark:bg-[#0A0A0A] mt-20 transition-colors duration-200">
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="flex flex-col md:flex-row justify-between gap-8">
           <div>
-            <div className="flex items-center gap-2.5 font-display font-bold text-xl mb-3">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-500 via-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-md shadow-cyan-500/20">
-                <InfinityIcon size={16} strokeWidth={2.4} />
-              </div>
-              <span className="tracking-tight">
-                <span className="bg-gradient-to-r from-cyan-500 to-indigo-600 dark:from-cyan-400 dark:to-indigo-400 bg-clip-text text-transparent font-extrabold">AI</span>
-                <span className="text-slate-950 dark:text-white">AndBeyond</span>
-              </span>
+            <div className="flex items-center gap-1 font-display font-bold text-xl mb-3 tracking-tight">
+              <span className="text-[#F5A623] font-extrabold">AI</span>
+              <span className="text-[#111111] dark:text-white">AndBeyond</span>
             </div>
-            <p className="text-text-2 text-sm max-w-xs leading-relaxed">
+            <p className="text-[#555555] dark:text-[#A0A0A0] text-sm max-w-xs leading-relaxed">
               AI tools, AI agents, automation workflows, and tutorials for students and professionals who want to stay ahead.
             </p>
           </div>
 
           <div className="flex flex-wrap gap-10 sm:gap-14">
             <div>
-              <p className="text-text-1 font-semibold text-sm mb-3">Explore</p>
+              <p className="text-[#111111] dark:text-white font-semibold text-sm mb-3">Explore</p>
               <div className="flex flex-col gap-2">
-                <Link to="/" className="text-text-2 text-sm hover:text-accent transition-colors">Home</Link>
-                <Link to="/blog" className="text-text-2 text-sm hover:text-accent transition-colors">Blog</Link>
-                <Link to="/about" className="text-text-2 text-sm hover:text-accent transition-colors">About Us</Link>
-                <Link to="/contact" className="text-text-2 text-sm hover:text-accent transition-colors">Contact</Link>
+                <Link to="/" className="text-[#555555] dark:text-[#A0A0A0] text-sm hover:text-[#F5A623] transition-colors">Home</Link>
+                <Link to="/blog" className="text-[#555555] dark:text-[#A0A0A0] text-sm hover:text-[#F5A623] transition-colors">Blog</Link>
+                <Link to="/about" className="text-[#555555] dark:text-[#A0A0A0] text-sm hover:text-[#F5A623] transition-colors">About Us</Link>
+                <Link to="/contact" className="text-[#555555] dark:text-[#A0A0A0] text-sm hover:text-[#F5A623] transition-colors">Contact</Link>
               </div>
             </div>
 
             <div>
-              <p className="text-text-1 font-semibold text-sm mb-3">Legal & Trust</p>
+              <p className="text-[#111111] dark:text-white font-semibold text-sm mb-3">Legal & Trust</p>
               <div className="flex flex-col gap-2">
-                <Link to="/privacy-policy" className="text-text-2 text-sm hover:text-accent transition-colors">Privacy Policy</Link>
-                <Link to="/affiliate-disclosure" className="text-text-2 text-sm hover:text-accent transition-colors">Affiliate Disclosure</Link>
-                <Link to="/contact" className="text-text-2 text-sm hover:text-accent transition-colors">Editorial Support</Link>
+                <Link to="/privacy-policy" className="text-[#555555] dark:text-[#A0A0A0] text-sm hover:text-[#F5A623] transition-colors">Privacy Policy</Link>
+                <Link to="/affiliate-disclosure" className="text-[#555555] dark:text-[#A0A0A0] text-sm hover:text-[#F5A623] transition-colors">Affiliate Disclosure</Link>
+                <Link to="/contact" className="text-[#555555] dark:text-[#A0A0A0] text-sm hover:text-[#F5A623] transition-colors">Editorial Support</Link>
               </div>
             </div>
 
             <div>
-              <p className="text-text-1 font-semibold text-sm mb-3">Topics</p>
+              <p className="text-[#111111] dark:text-white font-semibold text-sm mb-3">Topics</p>
               <div className="flex flex-col gap-2">
                 {['AI Tools', 'AI Agents & Automation', 'Web Hosting', 'Tutorials', 'Productivity', 'MakeMoneyWithAI'].map(cat => (
-                  <Link key={cat} to={`/blog?category=${encodeURIComponent(cat)}`} className="text-text-2 text-sm hover:text-accent transition-colors">
+                  <Link key={cat} to={`/blog?category=${encodeURIComponent(cat)}`} className="text-[#555555] dark:text-[#A0A0A0] text-sm hover:text-[#F5A623] transition-colors">
                     {cat}
                   </Link>
                 ))}
@@ -54,17 +48,17 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-slate-200/80 dark:border-white/10 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-text-2">
+        <div className="border-t border-[#E5E5E5] dark:border-[#262626] mt-10 pt-6 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-[#999999] dark:text-[#666666]">
           <p>&copy; {new Date().getFullYear()} AIAndBeyond. All rights reserved.</p>
           <div className="flex flex-wrap items-center justify-center gap-4 text-center md:text-right">
             <span>
               This site contains affiliate links. We may earn a commission at no extra cost to you.
             </span>
-            <Link to="/affiliate-disclosure" className="text-accent hover:underline font-medium">
+            <Link to="/affiliate-disclosure" className="text-[#F5A623] hover:underline font-medium">
               Read Disclosure
             </Link>
             <span>·</span>
-            <Link to="/privacy-policy" className="text-accent hover:underline font-medium">
+            <Link to="/privacy-policy" className="text-[#F5A623] hover:underline font-medium">
               Privacy
             </Link>
           </div>

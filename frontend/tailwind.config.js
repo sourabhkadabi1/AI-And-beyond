@@ -6,7 +6,6 @@ export default {
     extend: {
       colors: {
         accent: 'var(--accent)',
-        'accent-2': 'var(--accent-2)',
         dark: {
           bg: 'var(--bg-page)',
           surface: 'var(--bg-surface)',
@@ -14,17 +13,22 @@ export default {
           border: 'var(--border-color)',
         },
         light: {
-          bg: '#F8FAFC',
+          bg: '#FAFAFA',
           surface: '#FFFFFF',
-          border: '#E2E8F0',
+          elevated: '#F5F5F5',
+          border: '#E5E5E5',
         },
         'text-1': 'var(--text-primary)',
         'text-2': 'var(--text-secondary)',
+        'text-3': 'var(--text-muted)',
       },
       fontFamily: {
         display: ['Space Grotesk', 'sans-serif'],
         body: ['Inter', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
+      },
+      borderRadius: {
+        card: '10px',
       },
     },
   },

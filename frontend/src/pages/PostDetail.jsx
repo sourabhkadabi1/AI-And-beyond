@@ -144,15 +144,15 @@ export default function PostDetail() {
   if (loading) {
     return (
       <div className="max-w-3xl mx-auto px-6 py-12 w-full animate-pulse">
-        <div className="w-24 h-6 bg-dark-surface rounded mb-8"></div>
-        <div className="w-32 h-8 bg-dark-surface rounded-full mb-6"></div>
-        <div className="w-full h-12 bg-dark-surface rounded mb-4"></div>
-        <div className="w-3/4 h-12 bg-dark-surface rounded mb-8"></div>
-        <div className="w-full h-[400px] bg-dark-surface rounded-xl mb-10"></div>
+        <div className="w-24 h-6 bg-[#F5F5F5] dark:bg-[#1C1C1C] rounded mb-8"></div>
+        <div className="w-32 h-8 bg-[#F5F5F5] dark:bg-[#1C1C1C] rounded-lg mb-6"></div>
+        <div className="w-full h-12 bg-[#F5F5F5] dark:bg-[#1C1C1C] rounded mb-4"></div>
+        <div className="w-3/4 h-12 bg-[#F5F5F5] dark:bg-[#1C1C1C] rounded mb-8"></div>
+        <div className="w-full h-[400px] bg-[#F5F5F5] dark:bg-[#1C1C1C] rounded-xl mb-10"></div>
         <div className="space-y-4">
-          <div className="h-4 bg-dark-surface rounded w-full"></div>
-          <div className="h-4 bg-dark-surface rounded w-full"></div>
-          <div className="h-4 bg-dark-surface rounded w-5/6"></div>
+          <div className="h-4 bg-[#F5F5F5] dark:bg-[#1C1C1C] rounded w-full"></div>
+          <div className="h-4 bg-[#F5F5F5] dark:bg-[#1C1C1C] rounded w-full"></div>
+          <div className="h-4 bg-[#F5F5F5] dark:bg-[#1C1C1C] rounded w-5/6"></div>
         </div>
       </div>
     );
@@ -161,32 +161,24 @@ export default function PostDetail() {
   if (error || !post) {
     return (
       <div className="max-w-3xl mx-auto px-6 py-24 text-center">
-        <h1 className="font-display text-3xl font-bold text-text-1 mb-4">{error || 'Post not found'}</h1>
-        <Link to="/blog" className="text-[#5A50EE] hover:underline flex items-center justify-center gap-2">
+        <h1 className="font-display text-3xl font-bold text-[#111111] dark:text-[#FFFFFF] mb-4">{error || 'Post not found'}</h1>
+        <Link to="/blog" className="text-[#F5A623] hover:underline flex items-center justify-center gap-2">
           <ArrowLeft size={16} /> Back to Blog
         </Link>
       </div>
     );
   }
 
-  const categoryColor = CATEGORY_COLORS[post.category] || '#5A50EE';
+  const categoryColor = CATEGORY_COLORS[post.category] || '#F5A623';
   const affiliate = categoryAffiliate ? categoryAffiliate[post.category] : null;
 
   return (
-    <div className="min-h-screen text-slate-900 dark:text-slate-100 flex flex-col">
-      {/* ── Top Header Banner (Translucent, Global Particles Flowing Behind) ── */}
-      <div className="relative overflow-hidden bg-transparent border-b border-slate-200/60 dark:border-white/5 py-10 sm:py-16 transition-colors">
-        {/* Ambient Glows */}
-        <div className="absolute top-[-100px] right-[-60px] w-[500px] h-[500px] rounded-full bg-indigo-500/15 dark:bg-indigo-600/20 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-[-80px] left-[-40px] w-[450px] h-[450px] rounded-full bg-purple-500/10 dark:bg-purple-600/15 blur-3xl pointer-events-none" />
-
-        <div className="max-w-4xl mx-auto px-6 relative z-10">
-          {/* Frosted Glass Header Deck */}
-          <div className="glass-card rounded-3xl p-8 sm:p-10 relative overflow-hidden shadow-2xl">
-            {/* Top hairline reflection */}
-            <div className="absolute inset-x-0 top-0 h-px glow-streak pointer-events-none" />
-
-            <Link to="/blog" className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white transition-colors mb-6 text-sm font-semibold">
+    <div className="min-h-screen bg-[#FAFAFA] dark:bg-[#0A0A0A] text-[#111111] dark:text-[#FFFFFF] flex flex-col">
+      {/* ── Article Header ── */}
+      <div className="border-b border-[#E5E5E5] dark:border-[#262626] py-10 sm:py-16">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E5] dark:border-[#262626] rounded-xl p-8 sm:p-10">
+            <Link to="/blog" className="inline-flex items-center gap-2 text-[#555555] dark:text-[#A0A0A0] hover:text-[#F5A623] transition-colors mb-6 text-sm font-semibold">
               <ArrowLeft size={16} />
               <span>Back to Blog</span>
             </Link>
@@ -194,25 +186,25 @@ export default function PostDetail() {
             <div className="mb-4 inline-block">
               <Link 
                 to={`/blog?category=${encodeURIComponent(post.category)}`}
-                className="px-3.5 py-1 rounded-full text-xs font-extrabold tracking-wide uppercase transition-transform hover:scale-105 inline-block"
+                className="px-3.5 py-1 rounded-lg text-xs font-extrabold tracking-wide uppercase transition-colors inline-block"
                 style={{ backgroundColor: `${categoryColor}20`, color: categoryColor, border: `1px solid ${categoryColor}40` }}
               >
                 {post.category}
               </Link>
             </div>
 
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-950 dark:text-white leading-tight mb-6">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#111111] dark:text-[#FFFFFF] leading-tight mb-6">
               {post.title}
             </h1>
 
-            <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-200/80 dark:border-white/10 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+            <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-[#E5E5E5] dark:border-[#262626] text-xs sm:text-sm text-[#555555] dark:text-[#A0A0A0]">
               <div className="flex items-center gap-6">
                 <div className="flex items-center gap-2 font-medium">
-                  <Calendar size={15} className="text-indigo-600 dark:text-indigo-400" />
+                  <Calendar size={15} className="text-[#F5A623]" />
                   <span>{new Date(post.published_at || post.created_at || Date.now()).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                 </div>
                 <div className="flex items-center gap-2 font-medium">
-                  <Clock size={15} className="text-indigo-600 dark:text-indigo-400" />
+                  <Clock size={15} className="text-[#F5A623]" />
                   <span>{post.read_time || '5 min'} read</span>
                 </div>
               </div>
@@ -223,14 +215,12 @@ export default function PostDetail() {
         </div>
       </div>
 
-      {/* ── Article Content Area (Translucent, Frosted Glass Sanctuary Card) ── */}
-      <div className="flex-1 bg-transparent py-12 sm:py-16 transition-colors">
+      {/* ── Article Content ── */}
+      <div className="flex-1 py-12 sm:py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="glass-card rounded-3xl p-6 sm:p-12 relative overflow-hidden shadow-2xl">
-            {/* Top hairline reflection */}
-            <div className="absolute inset-x-0 top-0 h-px glow-streak pointer-events-none" />
+          <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E5] dark:border-[#262626] rounded-xl p-6 sm:p-12">
             {post.cover_image && (
-              <figure className="mb-10 rounded-2xl overflow-hidden shadow-lg border border-slate-200/80 dark:border-slate-800">
+              <figure className="mb-10 rounded-lg overflow-hidden border border-[#E5E5E5] dark:border-[#262626]">
                 <img 
                   src={post.cover_image} 
                   alt={post.title}
@@ -245,7 +235,7 @@ export default function PostDetail() {
               </div>
             )}
 
-            <div className="prose prose-lg max-w-none mb-12 post-content text-slate-800 dark:text-slate-200 leading-relaxed" dangerouslySetInnerHTML={{ __html: (() => {
+            <div className="prose prose-lg max-w-none mb-12 post-content text-[#555555] dark:text-[#A0A0A0] leading-relaxed" dangerouslySetInnerHTML={{ __html: (() => {
               // Only allow iframes from trusted video domains
               DOMPurify.addHook('uponSanitizeElement', (node, data) => {
                 if (data.tagName === 'iframe') {
@@ -288,14 +278,14 @@ export default function PostDetail() {
             )}
 
             {/* Pinterest Save CTA */}
-            <div className="bg-rose-50/70 dark:bg-rose-950/20 rounded-2xl p-8 border border-rose-200/70 dark:border-rose-500/20 text-center mb-10 shadow-xs backdrop-blur-xs">
-              <h3 className="font-display text-xl font-bold text-slate-950 dark:text-white mb-2">Save this for later!</h3>
-              <p className="text-slate-600 dark:text-slate-300 text-sm mb-6">Found this breakdown helpful? Pin it to your boards for quick reference.</p>
+            <div className="bg-[#F5F5F5] dark:bg-[#1C1C1C] rounded-lg p-8 border border-[#E5E5E5] dark:border-[#262626] text-center mb-10">
+              <h3 className="font-display text-xl font-bold text-[#111111] dark:text-[#FFFFFF] mb-2">Save this for later!</h3>
+              <p className="text-[#555555] dark:text-[#A0A0A0] text-sm mb-6">Found this breakdown helpful? Pin it to your boards for quick reference.</p>
               <a 
                 href={`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(window.location.href)}&media=${encodeURIComponent(post.cover_image || '')}&description=${encodeURIComponent(post.pinterest_desc || post.title)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#E60023] hover:bg-[#c9001f] text-white px-7 py-3 rounded-xl font-bold text-sm transition-all shadow-md shadow-rose-600/20 hover:scale-105"
+                className="inline-flex items-center gap-2 bg-[#E60023] hover:bg-[#c9001f] text-white px-7 py-3 rounded-lg font-bold text-sm transition-colors"
               >
                 <Bookmark size={18} />
                 Save to Pinterest
@@ -303,13 +293,13 @@ export default function PostDetail() {
             </div>
 
             {/* About AIAndBeyond Micro Box */}
-            <div className="bg-slate-50/70 dark:bg-white/5 backdrop-blur-xs rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row gap-6 items-center md:items-start border border-slate-200/80 dark:border-white/10">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-indigo-600 to-cyan-500 flex items-center justify-center text-white font-extrabold text-xl shadow-md flex-shrink-0">
+            <div className="bg-[#F5F5F5] dark:bg-[#1C1C1C] rounded-lg p-6 sm:p-8 flex flex-col md:flex-row gap-6 items-center md:items-start border border-[#E5E5E5] dark:border-[#262626]">
+              <div className="w-16 h-16 rounded-xl bg-[#F5A623] flex items-center justify-center text-[#0A0A0A] font-extrabold text-xl flex-shrink-0">
                 AB
               </div>
               <div>
-                <h3 className="font-display text-lg font-bold text-slate-950 dark:text-white mb-1.5">Published by AIAndBeyond</h3>
-                <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">
+                <h3 className="font-display text-lg font-bold text-[#111111] dark:text-[#FFFFFF] mb-1.5">Published by AIAndBeyond</h3>
+                <p className="text-[#555555] dark:text-[#A0A0A0] text-xs sm:text-sm leading-relaxed">
                   We review the latest AI tools, craft deep-dive guides, and explore modern cloud hosting to help developers and creators level up.
                 </p>
               </div>
@@ -318,14 +308,14 @@ export default function PostDetail() {
         </div>
       </div>
 
-      {/* ── Related Posts Tier (Translucent Backdrop) ── */}
+      {/* ── Related Posts ── */}
       {relatedPosts.length > 0 && (
-        <div className="bg-slate-100/30 dark:bg-black/20 border-t border-slate-200/60 dark:border-white/5 py-16 transition-colors">
+        <div className="bg-[#F5F5F5] dark:bg-[#141414] border-t border-[#E5E5E5] dark:border-[#262626] py-16">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200/90 dark:border-indigo-800/70 mb-3 shadow-xs">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-extrabold bg-[#F5A623]/10 text-[#F5A623] border border-[#F5A623]/30 mb-3">
               KEEP READING
             </div>
-            <h2 className="font-display text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white mb-8">Related Reads</h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#111111] dark:text-[#FFFFFF] mb-8">Related Reads</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {relatedPosts.map(relatedPost => (
                 <BlogCard key={relatedPost.id} post={relatedPost} />

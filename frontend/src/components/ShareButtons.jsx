@@ -17,18 +17,18 @@ export default function ShareButtons({ title, url, image }) {
 
   return (
     <div className="flex items-center gap-3">
-      <span className="text-text-2 text-sm">Share:</span>
+      <span className="text-[#555555] dark:text-[#A0A0A0] text-sm font-medium">Share:</span>
       <a href={pinterestUrl} target="_blank" rel="noopener noreferrer"
-        className="px-3 py-1.5 rounded-lg bg-[#E6002310] text-[#E60023] border border-[#E6002325] text-sm hover:bg-[#E6002320] transition-colors">
+        className="px-3 py-1.5 rounded-lg bg-[#E60023]/10 text-[#E60023] border border-[#E60023]/25 text-sm hover:bg-[#E60023]/20 transition-colors font-medium">
         Pinterest
       </a>
       <a href={twitterUrl} target="_blank" rel="noopener noreferrer"
-        className="px-3 py-1.5 rounded-lg bg-[#F5F5FF] text-text-2 border border-dark-border text-sm hover:border-accent/50 transition-colors">
+        className="px-3 py-1.5 rounded-lg bg-[#F5F5F5] dark:bg-[#1C1C1C] text-[#555555] dark:text-[#A0A0A0] border border-[#E5E5E5] dark:border-[#262626] text-sm hover:border-[#F5A623] hover:text-[#111111] dark:hover:text-white transition-colors">
         𝕏
       </a>
       <button onClick={copyLink}
-        className="px-3 py-1.5 rounded-lg bg-[#F5F5FF] text-text-2 border border-dark-border text-sm hover:border-accent/50 transition-colors flex items-center gap-1.5">
-        {copied ? <Check size={14} className="text-green-500" /> : <Link2 size={14} />}
+        className="px-3 py-1.5 rounded-lg bg-[#F5F5F5] dark:bg-[#1C1C1C] text-[#555555] dark:text-[#A0A0A0] border border-[#E5E5E5] dark:border-[#262626] text-sm hover:border-[#F5A623] hover:text-[#111111] dark:hover:text-white transition-colors flex items-center gap-1.5 cursor-pointer">
+        {copied ? <Check size={14} className="text-emerald-500" /> : <Link2 size={14} />}
         {copied ? 'Copied' : 'Copy'}
       </button>
     </div>

@@ -10,7 +10,7 @@ export default function VideoEmbed({ url }) {
   if (!embedUrl) return null
 
   return (
-    <div className="my-8 rounded-xl overflow-hidden border border-dark-border aspect-video">
+    <div className="my-8 rounded-xl overflow-hidden border border-[#E5E5E5] dark:border-[#262626] aspect-video">
       <iframe
         src={embedUrl}
         title="Video"
