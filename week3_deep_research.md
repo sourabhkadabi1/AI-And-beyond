@@ -12,7 +12,6 @@
 4. [POST 12 (Thursday - Tutorials): How to Use Canva AI for Pinterest Pins (Without Looking AI-Generated)](#post-12-tutorials)
 5. [POST 13 (Friday - Productivity): Top AI Chrome Extensions for Students & Developers (Tested for RAM, Privacy & Latency)](#post-13-productivity)
 6. [WEEKEND PIN RECYCLING GAP (Saturday & Sunday): Evergreen Cascade & Secondary Board Repin Strategy](#weekend-recycling-gap)
-7. [UPCOMING WEEK 4 KICKOFF: Post 14 (Monday - Make Money with AI): How to Start Affiliate Marketing with a Tech Blog](#post-14-make-money)
 
 ---
 
@@ -198,40 +197,3 @@ User Goal ──> [State & Memory] ──> [LLM Planner]
 - **Sunday (Variant Slot 2 - 1:30 PM IST):** Deploy Pin 11.4 (*4 Real Things AI Agents Can Do*) to `AI Automation`.
 - **Sunday (Variant Slot 3 - 8:00 PM IST):** Deploy Pin 12.4 (*Batch 10 Pins in 10 Mins Canva Workflow*) to `Design & Marketing`.
 
----
-
-<a name="post-14-make-money"></a>
-# 7. UPCOMING WEEK 4 KICKOFF: POST 14 (Monday - Make Money with AI)
-## Topic: How to Start Affiliate Marketing with a Tech Blog in 2026 (Unit Economics & Disclosures)
-*(Preserved as the Flagship Kickoff Post for Week 4 under the 5-Post Cadence)*
-
-### A. Core Search Intent & Keyword Strategy
-- **Primary Search Query:** `how to start affiliate marketing with a blog 2026`
-- **Secondary Queries:** `tech blog affiliate marketing income`, `hostinger affiliate commission rates india`, `canva affiliate program review`, `ftc affiliate disclosure blog guidelines`, `affiliate marketing for programmers`
-- **Category:** `Make Money with AI`
-- **Target Slug:** `how-to-start-affiliate-marketing-with-a-blog`
-- **Core Searcher Pain Point:** "Make money online" content is infamous for delusional claims ("make $10,000/day on autopilot"). In reality, affiliate marketing on a tech blog is a precise conversion funnel governed by traffic quality, search intent, domain authority, and trust. Readers need the unvarnished mathematical truth: CPC, conversion rates, payout schedules, and legal compliance.
-
----
-
-### B. The Unit Economics of a Tech Blog Affiliate Funnel
-
-#### 1. The Real Conversion Math (Per 1,000 Organic Pageviews on Buyer-Intent Posts)
-- **High-Intent Post Example:** *Hostinger Review 2026* or *Best AI Writing Tools for Bloggers*.
-- **Monthly Organic Visitors:** 1,000 targeted visitors.
-- **Outbound Click-Through Rate (CTR) to Affiliate Link:** 12% (120 clicks).
-- **Merchant Landing Page Conversion Rate:** 3.5% (4.2 completed sales).
-- **Average Bounty / Commission per Sale:**
-  - Hostinger ($65 bounty = ~₹5,460): 4 sales = **₹21,840 / month** from a single high-ranking article!
-  - Canva Pro ($36 annual rev-share or $9/mo): 6 signups = **~₹4,500 / month**.
-- **Total Revenue Potential per 1,000 Intent Visitors:** **₹26,340 ($315 USD)**.
-
-#### 2. Top High-Yield Tech Affiliate Programs (2026 Verified)
-| Program | Cookie Window | Commission Structure | Minimum Payout | Payout Method |
-| :--- | :--- | :--- | :--- | :--- |
-| **Hostinger Affiliate** | 30 Days | **Up to 60% CPA** ($65 to $100 flat per sale) | $100 | Wire Transfer, PayPal |
-| **Canva Pro Affiliate** | 30 Days | **Up to $36 per subscriber** | $10 | PayPal, Direct Deposit |
-| **Notion Partner Program** | 90 Days | **50% recurring for 1st year** | $5 | Stripe Connect |
-| **Amazon Associates (India)** | 24 Hours | **1% - 5%** (Tech laptops/electronics) | ₹1,000 | NEFT Direct Bank Transfer |
-
----
