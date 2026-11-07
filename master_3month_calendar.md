@@ -51,6 +51,16 @@
   - Sunday: Deploy Week 3 V4 Variants (Pins 10.4, 11.4, 12.4, 13.4) across secondary boards.
 - *(Note: Post 14 on Affiliate Marketing rolls into Week 4 Monday as the flagship kickoff!)*
 
-### WEEKS 4 TO 12 (Advanced Scaling, Automation & Monetization)
+### WEEK 4 (Monetization, High-Ticket Affiliates & Agent Automation) — Status: READY FOR NEXT WEEK
+- **Monday (Post 14 - Make Money):** *How to Start Affiliate Marketing with a Tech Blog in 2026 (Beginner to ₹50,000/Month Blueprint)*
+- **Tuesday (Post 15 - AI Tools):** *Best Free AI Image Generators for Tech & Pinterest in 2026 (Without Getting Flagged: Flux, Ideogram, Recraft & Leonardo)*
+- **Wednesday (Post 16 - Web Hosting):** *Free vs Paid Hosting — The Hidden Renewal Trap (When to Upgrade from Vercel & GitHub Pages)*
+- **Thursday (Post 17 - AI Agents):** *How to Automate Social Media with AI Agents (Build a Multi-Platform Cascade with n8n & Python)*
+- **Friday (Post 18 - Tutorials):** *How to Use Claude AI for Research & Code (Advanced Artifacts, Projects & System Prompts)*
+- **Saturday & Sunday (Weekend Pin Recycling Gap):**
+  - Saturday: Recycle Top Pins 6.2, 10.2, 12.2 + Deploy Cascade Pin 14.4 (*1,000-Visitor Tech Affiliate Breakdown*)
+  - Sunday: Deploy Week 4 V4 Variants (Pins 15.4, 16.4, 17.4, 18.4) across secondary boards.
+
+### WEEKS 5 TO 12 (Advanced Scaling, Automation & Monetization)
 - **Full calendar topics systematically scheduled across weeks 4-12 as transcribed in the roadmap grid above.**
 - Each upcoming week will receive its corresponding Deep Research Document, Ready-to-Paste HTML Suite, and Anti-AI Pinterest Playbook.
