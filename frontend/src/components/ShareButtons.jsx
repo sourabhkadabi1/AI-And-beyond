@@ -13,7 +13,6 @@ export default function ShareButtons({ title, url, image }) {
 
   const mediaParam = image ? `&media=${encodeURIComponent(image)}` : ''
   const pinterestUrl = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(fullUrl)}${mediaParam}&description=${encodeURIComponent(title)}`
-  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(fullUrl)}`
 
   return (
     <div className="flex items-center gap-3">
@@ -21,10 +20,6 @@ export default function ShareButtons({ title, url, image }) {
       <a href={pinterestUrl} target="_blank" rel="noopener noreferrer"
         className="px-3 py-1.5 rounded-lg bg-[#E60023]/10 text-[#E60023] border border-[#E60023]/25 text-sm hover:bg-[#E60023]/20 transition-colors font-medium">
         Pinterest
-      </a>
-      <a href={twitterUrl} target="_blank" rel="noopener noreferrer"
-        className="px-3 py-1.5 rounded-lg bg-[#F5F5F5] dark:bg-[#1C1C1C] text-[#555555] dark:text-[#A0A0A0] border border-[#E5E5E5] dark:border-[#262626] text-sm hover:border-[#F5A623] hover:text-[#111111] dark:hover:text-white transition-colors">
-        𝕏
       </a>
       <button onClick={copyLink}
         className="px-3 py-1.5 rounded-lg bg-[#F5F5F5] dark:bg-[#1C1C1C] text-[#555555] dark:text-[#A0A0A0] border border-[#E5E5E5] dark:border-[#262626] text-sm hover:border-[#F5A623] hover:text-[#111111] dark:hover:text-white transition-colors flex items-center gap-1.5 cursor-pointer">
