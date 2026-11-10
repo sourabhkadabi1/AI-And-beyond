@@ -17,5 +17,5 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-# Sitemap Location (Updated with Posts 1 to 9)
+# Sitemap Location (Updated with Posts 1 to 15)
 Sitemap: https://www.aiandbeyondtech.com/sitemap.xml
