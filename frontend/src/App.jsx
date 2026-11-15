@@ -17,6 +17,7 @@ import Login from './pages/admin/Login'
 import Dashboard from './pages/admin/Dashboard'
 import NewPost from './pages/admin/NewPost'
 import EditPost from './pages/admin/EditPost'
+import NotFound from './pages/NotFound'
 
 const queryClient = new QueryClient()
 
@@ -41,18 +42,7 @@ export default function App() {
                   <Route path="/admin/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                   <Route path="/admin/new-post" element={<ProtectedRoute><NewPost /></ProtectedRoute>} />
                   <Route path="/admin/edit/:id" element={<ProtectedRoute><EditPost /></ProtectedRoute>} />
-                  <Route path="*" element={
-                    <div className="min-h-screen flex items-center justify-center">
-                      <div className="text-center bg-white dark:bg-[#141414] border border-[#E5E5E5] dark:border-[#262626] rounded-[10px] p-12 max-w-md mx-4">
-                        <h1 className="text-6xl font-extrabold font-display text-[#F5A623] mb-4">404</h1>
-                        <p className="text-xl font-bold text-[#111111] dark:text-white mb-2">Page Not Found</p>
-                        <p className="text-[#555555] dark:text-[#A0A0A0] mb-8">The page you're looking for doesn't exist or has been moved.</p>
-                        <a href="/" className="inline-flex items-center gap-2 bg-[#F5A623] hover:bg-[#E09915] text-[#111111] px-6 py-3 rounded-lg font-bold text-sm transition-colors shadow-sm">
-                          ← Back to Home
-                        </a>
-                      </div>
-                    </div>
-                  } />
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>
               <Footer />

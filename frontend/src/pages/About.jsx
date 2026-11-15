@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Bookmark, ExternalLink, ShieldCheck, CheckCircle2, Award, Users, Mail, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { updateSEO } from '../utils/seo';
 
 const TOPICS = [
   { name: 'AI Tools', color: '#5A50EE', desc: 'Real-world testing of cutting-edge LLMs and creative tools' },
@@ -12,6 +13,15 @@ const TOPICS = [
 ];
 
 export default function About() {
+  useEffect(() => {
+    updateSEO({
+      title: 'About Us — Editorial Mission & Standards | AIAndBeyond',
+      description: 'Discover AIAndBeyond: our independent empirical testing methodology, hardware benchmarks, and mission to deliver anti-fluff AI & tech intelligence.',
+      canonical: 'https://www.aiandbeyondtech.com/about',
+      noindex: false
+    });
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#FAFAFA] dark:bg-[#0A0A0A] text-[#111111] dark:text-[#FFFFFF] flex flex-col">
       {/* ── Editorial Header ── */}

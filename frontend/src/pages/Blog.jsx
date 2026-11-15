@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { fetchPosts } from '../utils/api'
 import CategoryFilter from '../components/CategoryFilter'
 import BlogCard from '../components/BlogCard'
+import { updateSEO } from '../utils/seo'
 import { Search, X } from 'lucide-react'
 
 export default function Blog() {
@@ -19,6 +20,12 @@ export default function Blog() {
   const POSTS_PER_PAGE = 12
 
   useEffect(() => {
+    updateSEO({
+      title: categoryParam ? `${categoryParam} Articles | AIAndBeyond` : 'All Articles & Tutorials | AIAndBeyond',
+      description: 'Explore our comprehensive archive of tested engineering benchmarks, AI tutorials, web hosting guides, and passive income blueprints.',
+      canonical: 'https://www.aiandbeyondtech.com/blog',
+      noindex: false
+    });
     setPage(0)
     setPosts([])
     setHasMore(true)

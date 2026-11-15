@@ -3,46 +3,46 @@
   <!-- Core Static Pages -->
   <url>
     <loc>https://www.aiandbeyondtech.com/</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.aiandbeyondtech.com/blog</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
     <loc>https://www.aiandbeyondtech.com/about</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.aiandbeyondtech.com/contact</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.60</priority>
   </url>
   <url>
     <loc>https://www.aiandbeyondtech.com/privacy-policy</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.50</priority>
   </url>
   <url>
     <loc>https://www.aiandbeyondtech.com/affiliate-disclosure</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.50</priority>
   </url>
 
-  <!-- Published Articles (Posts 1 to 15) -->
+  <!-- Published Articles (Posts 1 to 18) -->
   <!-- Post 1: AI Tools -->
   <url>
     <loc>https://www.aiandbeyondtech.com/blog/10-best-free-ai-tools-for-students-2026</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -50,7 +50,7 @@
   <!-- Post 2: Web Hosting -->
   <url>
     <loc>https://www.aiandbeyondtech.com/blog/how-to-start-a-tech-ai-blog-in-2026</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -58,7 +58,7 @@
   <!-- Post 3: Tutorials -->
   <url>
     <loc>https://www.aiandbeyondtech.com/blog/how-to-use-chatgpt-to-write-blog-posts</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -66,7 +66,7 @@
   <!-- Post 4: Make Money -->
   <url>
     <loc>https://www.aiandbeyondtech.com/blog/10-ways-to-make-money-with-ai-tools-2026</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -74,7 +74,7 @@
   <!-- Post 5: AI Tools -->
   <url>
     <loc>https://www.aiandbeyondtech.com/blog/chatgpt-vs-claude-vs-gemini</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -82,7 +82,7 @@
   <!-- Post 6: AI Agents -->
   <url>
     <loc>https://www.aiandbeyondtech.com/blog/what-are-ai-agents-beginners-guide-2026</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -90,7 +90,7 @@
   <!-- Post 7: Productivity -->
   <url>
     <loc>https://www.aiandbeyondtech.com/blog/best-free-productivity-tools-for-students-2026</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -98,7 +98,7 @@
   <!-- Post 8: Make Money -->
   <url>
     <loc>https://www.aiandbeyondtech.com/blog/how-cs-students-can-earn-50000-per-month-using-ai</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -106,7 +106,7 @@
   <!-- Post 9: AI Tools -->
   <url>
     <loc>https://www.aiandbeyondtech.com/blog/best-ai-writing-tools-for-bloggers</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -114,7 +114,7 @@
   <!-- Post 10: Web Hosting -->
   <url>
     <loc>https://www.aiandbeyondtech.com/blog/best-web-hosting-for-students-india</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
@@ -122,7 +122,7 @@
   <!-- Post 11: AI Agents -->
   <url>
     <loc>https://www.aiandbeyondtech.com/blog/ai-agents-vs-chatbots-real-difference</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
@@ -130,7 +130,7 @@
   <!-- Post 12: Tutorials -->
   <url>
     <loc>https://www.aiandbeyondtech.com/blog/how-to-use-canva-ai-for-pinterest-pins</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
@@ -138,7 +138,7 @@
   <!-- Post 13: Productivity -->
   <url>
     <loc>https://www.aiandbeyondtech.com/blog/top-ai-chrome-extensions</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
@@ -146,7 +146,7 @@
   <!-- Post 14: Make Money -->
   <url>
     <loc>https://www.aiandbeyondtech.com/blog/how-to-start-affiliate-marketing-with-a-blog</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
@@ -154,7 +154,31 @@
   <!-- Post 15: AI Tools -->
   <url>
     <loc>https://www.aiandbeyondtech.com/blog/best-free-ai-image-generators-tech-pinterest</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Post 16: Web Hosting -->
+  <url>
+    <loc>https://www.aiandbeyondtech.com/blog/free-vs-paid-hosting-hidden-trap</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Post 17: AI Agents & Automation -->
+  <url>
+    <loc>https://www.aiandbeyondtech.com/blog/how-to-automate-social-media-ai-agents</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Post 18: Tutorials -->
+  <url>
+    <loc>https://www.aiandbeyondtech.com/blog/how-to-use-claude-ai-for-research-and-code</loc>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>

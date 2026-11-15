@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Mail, MessageSquare, Send, CheckCircle2, Clock, Globe, HelpCircle, ArrowLeft, Copy, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { updateSEO } from '../utils/seo';
 import toast from 'react-hot-toast';
 
 export default function Contact() {
+  useEffect(() => {
+    updateSEO({
+      title: 'Contact Us | AIAndBeyond',
+      description: 'Get in touch with the AIAndBeyond editorial team for technical questions, partnership proposals, or software benchmark requests.',
+      canonical: 'https://www.aiandbeyondtech.com/contact',
+      noindex: false
+    });
+  }, []);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',

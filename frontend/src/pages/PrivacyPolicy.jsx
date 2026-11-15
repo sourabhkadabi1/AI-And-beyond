@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Shield, Lock, Eye, Mail, FileText, CheckCircle2, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { updateSEO } from '../utils/seo';
 
 export default function PrivacyPolicy() {
+  useEffect(() => {
+    updateSEO({
+      title: 'Privacy Policy | AIAndBeyond',
+      description: 'Privacy Policy for AIAndBeyond. Transparent details on how we protect data, respect user privacy, and handle analytics cookies.',
+      canonical: 'https://www.aiandbeyondtech.com/privacy-policy',
+      noindex: false
+    });
+  }, []);
+
   const lastUpdated = "September 18, 2026";
 
   return (

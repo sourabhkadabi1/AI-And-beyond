@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { DollarSign, ShieldCheck, CheckCircle2, HeartHandshake, AlertCircle, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { updateSEO } from '../utils/seo';
 
 export default function AffiliateDisclosure() {
+  useEffect(() => {
+    updateSEO({
+      title: 'Affiliate Disclosure | AIAndBeyond',
+      description: 'FTC Compliance and Affiliate Disclosure for AIAndBeyond. Transparent breakdown of how affiliate partnerships fund our independent lab testing.',
+      canonical: 'https://www.aiandbeyondtech.com/affiliate-disclosure',
+      noindex: false
+    });
+  }, []);
+
   const lastUpdated = "September 18, 2026";
 
   return (

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { fetchPosts, subscribeNewsletter } from '../utils/api'
 import { affiliates } from '../utils/affiliates'
 import BlogCard from '../components/BlogCard'
+import { updateSEO } from '../utils/seo'
 import toast from 'react-hot-toast'
 import { ArrowRight, Mail, ExternalLink, ImageIcon, BookOpen, Lightbulb, Rocket, Quote, FileText, CheckCircle2, Check } from 'lucide-react'
 
@@ -75,6 +76,12 @@ export default function Home() {
   }
 
   useEffect(() => {
+    updateSEO({
+      title: 'AIAndBeyond — Deep Technical AI Guides & Tech Benchmarks',
+      description: 'Empirical benchmarks, practical tutorials, and monetization guides on AI tools, AI agents, cloud hosting, and automation.',
+      canonical: 'https://www.aiandbeyondtech.com/',
+      noindex: false
+    });
     async function load() {
       try {
         const res = await fetchPosts(null, null, 0)

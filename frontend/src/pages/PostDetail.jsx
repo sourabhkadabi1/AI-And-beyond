@@ -7,6 +7,7 @@ import VideoEmbed from '../components/VideoEmbed';
 import AffiliateBlock from '../components/AffiliateBlock';
 import BlogCard from '../components/BlogCard';
 import { categoryAffiliate } from '../utils/affiliates';
+import { updateSEO } from '../utils/seo';
 import { ArrowLeft, Calendar, Clock, Bookmark } from 'lucide-react';
 
 const CATEGORY_COLORS = {
@@ -26,119 +27,121 @@ export default function PostDetail() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    let isMounted = true;
     async function loadPost() {
       try {
         setLoading(true);
         setError(null);
-        const res = await fetchPost(slug);
-        const data = res.data;
+        let res = null;
         
+        // Auto-retry up to 2 times to gracefully absorb server cold-starts
+        for (let attempt = 0; attempt <= 2; attempt++) {
+          try {
+            res = await fetchPost(slug);
+            if (res?.data) break;
+          } catch (fetchErr) {
+            if (attempt === 2) throw fetchErr;
+            await new Promise((r) => setTimeout(r, 1200));
+          }
+        }
+
+        const data = res?.data;
         if (!data) {
-          setError('Post not found');
+          if (isMounted) {
+            setError('Post not found');
+            updateSEO({
+              title: 'Post Not Found | AIAndBeyond',
+              description: 'The requested blog post could not be found.',
+              noindex: true
+            });
+          }
           return;
         }
-        
-        setPost(data);
 
-        // Fetch related posts
-        if (data.category) {
-          const relatedRes = await fetchPosts(data.category, null, 0);
-          const relatedData = relatedRes.data || [];
-          const filtered = relatedData.filter(p => p.slug !== slug).slice(0, 3);
-          setRelatedPosts(filtered);
-        }
+        if (isMounted) {
+          setPost(data);
 
-        // Set Meta Tags & Google Indexing Directives
-        document.title = `${data.title} | AIAndBeyond`;
-        
-        const setMetaTag = (attr, name, content) => {
-          let tag = document.querySelector(`meta[${attr}="${name}"]`);
-          if (!tag) {
-            tag = document.createElement('meta');
-            tag.setAttribute(attr, name);
-            document.head.appendChild(tag);
-          }
-          tag.setAttribute('content', content);
-        };
-
-        const postUrl = `https://www.aiandbeyondtech.com/blog/${slug}`;
-        const postDesc = data.meta_desc || data.excerpt || '';
-
-        // Standard SEO Meta
-        setMetaTag('name', 'description', postDesc);
-        setMetaTag('name', 'robots', 'index, follow, max-image-preview:large, max-snippet:-1');
-        setMetaTag('name', 'googlebot', 'index, follow, max-snippet:-1, max-image-preview:large');
-
-        // Canonical Link
-        let canonicalTag = document.querySelector('link[rel="canonical"]');
-        if (!canonicalTag) {
-          canonicalTag = document.createElement('link');
-          canonicalTag.setAttribute('rel', 'canonical');
-          document.head.appendChild(canonicalTag);
-        }
-        canonicalTag.setAttribute('href', postUrl);
-
-        // Open Graph
-        setMetaTag('property', 'og:title', data.title);
-        setMetaTag('property', 'og:description', postDesc);
-        setMetaTag('property', 'og:url', postUrl);
-        setMetaTag('property', 'og:type', 'article');
-        setMetaTag('property', 'og:site_name', 'AIAndBeyond');
-        if (data.cover_image) {
-          setMetaTag('property', 'og:image', data.cover_image);
-        }
-
-        // Twitter Cards
-        setMetaTag('name', 'twitter:card', 'summary_large_image');
-        setMetaTag('name', 'twitter:title', data.title);
-        setMetaTag('name', 'twitter:description', postDesc);
-        if (data.cover_image) {
-          setMetaTag('name', 'twitter:image', data.cover_image);
-        }
-
-        // Google Article Structured Data (JSON-LD)
-        let schemaTag = document.getElementById('schema-article');
-        if (!schemaTag) {
-          schemaTag = document.createElement('script');
-          schemaTag.id = 'schema-article';
-          schemaTag.type = 'application/ld+json';
-          document.head.appendChild(schemaTag);
-        }
-        schemaTag.textContent = JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "BlogPosting",
-          "headline": data.title,
-          "description": postDesc,
-          "image": data.cover_image || "https://www.aiandbeyondtech.com/hero.png",
-          "datePublished": data.published_at || data.created_at || "2026-11-04",
-          "dateModified": data.updated_at || data.published_at || data.created_at || "2026-11-04",
-          "author": {
-            "@type": "Organization",
-            "name": "AIAndBeyond",
-            "url": "https://www.aiandbeyondtech.com"
-          },
-          "publisher": {
-            "@type": "Organization",
-            "name": "AIAndBeyond",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "https://www.aiandbeyondtech.com/favicon.svg"
+          // Fetch related posts
+          if (data.category) {
+            try {
+              const relatedRes = await fetchPosts(data.category, null, 0);
+              const relatedData = relatedRes.data || [];
+              const filtered = relatedData.filter((p) => p.slug !== slug).slice(0, 3);
+              setRelatedPosts(filtered);
+            } catch (relErr) {
+              console.warn('Failed to fetch related posts:', relErr);
             }
-          },
-          "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": postUrl
           }
-        });
+
+          const postUrl = `https://www.aiandbeyondtech.com/blog/${slug}`;
+          const postDesc = data.meta_desc || data.excerpt || '';
+
+          // Synchronize comprehensive SEO & canonical directives
+          updateSEO({
+            title: `${data.title} | AIAndBeyond`,
+            description: postDesc,
+            canonical: postUrl,
+            image: data.cover_image || 'https://www.aiandbeyondtech.com/hero.png',
+            type: 'article',
+            noindex: false
+          });
+
+          // Google Article Structured Data (JSON-LD)
+          let schemaTag = document.getElementById('schema-article');
+          if (!schemaTag) {
+            schemaTag = document.createElement('script');
+            schemaTag.id = 'schema-article';
+            schemaTag.type = 'application/ld+json';
+            document.head.appendChild(schemaTag);
+          }
+          schemaTag.textContent = JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": data.title,
+            "description": postDesc,
+            "image": data.cover_image || "https://www.aiandbeyondtech.com/hero.png",
+            "datePublished": data.published_at || data.created_at || "2026-11-15",
+            "dateModified": data.updated_at || data.published_at || data.created_at || "2026-11-15",
+            "author": {
+              "@type": "Organization",
+              "name": "AIAndBeyond",
+              "url": "https://www.aiandbeyondtech.com"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "AIAndBeyond",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.aiandbeyondtech.com/favicon.svg"
+              }
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": postUrl
+            }
+          });
+        }
       } catch (err) {
         console.error('Error loading post:', err);
-        setError('Failed to load post');
+        if (isMounted) {
+          setError('Post not found');
+          updateSEO({
+            title: 'Post Not Found | AIAndBeyond',
+            description: 'The requested blog post could not be found.',
+            noindex: true
+          });
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     }
     loadPost();
     window.scrollTo(0, 0);
+    return () => {
+      isMounted = false;
+    };
   }, [slug]);
 
   if (loading) {
