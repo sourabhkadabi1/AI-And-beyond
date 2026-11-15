@@ -61,7 +61,7 @@ Stop highlighting 500-page textbooks! Learn how college students use Google Note
 * **Pin Title:** `The 5 Essential AI Tools Every College Student Needs in 2026`
 * **Description:**
 ```text
-The only 5 AI study tools you need in 2026: NotebookLM (textbooks), Anki FSRS (flashcards), Claude 3.5 Sonnet (STEM reasoning), Perplexity (research), and Obsidian (notes). Compare features on aiandbeyondtech.com! #StudyStack #StudentProductivity #AnkiFlashcards #CollegeHacks #StudyTips #StudyMotivation
+The only 5 AI study tools you need in 2026: NotebookLM (textbooks), Anki FSRS (flashcards), Gemini 2.0 / DeepSeek-R1 (unlimited free reasoning), Claude Sonnet (logic proofs), and Perplexity (research). Compare features on aiandbeyondtech.com! #StudyStack #StudentProductivity #AnkiFlashcards #CollegeHacks #StudyTips #StudyMotivation
 ```
 * **Canva Pro Visual Design Brief:**
   - **Canvas Dimensions:** `1000 × 1500 px`.
@@ -79,16 +79,16 @@ The only 5 AI study tools you need in 2026: NotebookLM (textbooks), Anki FSRS (f
 ### 📌 Pin 19.3: 4-Step Feynman Technique Study Guide
 * **Goal:** Step-by-Step Educational Saves
 * **Tagged Topics / Tags:** `Exam Prep`, `Feynman Technique`, `How to Study`, `Study Smart`
-* **Pin Title:** `How to Use Claude 3.5 Sonnet for the Feynman Technique`
+* **Pin Title:** `How to Use AI Reasoning for the Feynman Technique`
 * **Description:**
 ```text
-Master any difficult STEM concept in 10 minutes using the Feynman Technique powered by Claude 3.5 Sonnet. Step-by-step prompts to identify knowledge gaps before exams on aiandbeyondtech.com! #FeynmanTechnique #StudyWithMe #ExamPrep #CollegeHacks #STEMStudents #ClaudeAI
+Master any difficult STEM concept in 10 minutes using the Feynman Technique powered by frontier AI reasoning (Claude Sonnet & DeepSeek-R1). Step-by-step prompts to identify knowledge gaps before exams on aiandbeyondtech.com! #FeynmanTechnique #StudyWithMe #ExamPrep #CollegeHacks #STEMStudents #AIStudy
 ```
 * **Canva Pro Visual Design Brief:**
   - 4 Sequential Numbered Bento Cards:
-    - `01. Prompt Claude to Explain Concept to a 10-Year-Old`
+    - `01. Prompt AI (Claude / Gemini / DeepSeek) to Explain Concept to a 10-Year-Old`
     - `02. Identify Where Technical Jargon is Used as a Crutch`
-    - `03. Ask Claude to Challenge Your Understanding with Edge Cases`
+    - `03. Ask AI to Stress-Test Your Understanding with Edge Cases`
     - `04. Generate Spaced Repetition Cards in Anki Format`
   - Headline: `THE 10-MINUTE FEYNMAN AI FRAMEWORK`.
   - Footer: `aiandbeyondtech.com`.
@@ -230,9 +230,9 @@ Should you buy Notion AI or ChatGPT Plus? Use this 4-step decision tree based on
 ```
 * **Canva Pro Visual Design Brief:**
   - Clean flowchart card:
-    - `Need Code & Deep Math? → ChatGPT Plus (o1/Canvas)`
+    - `Need Code & Deep Math? → ChatGPT Plus (o1/o3-mini)`
     - `Manage Projects & Wikis? → Notion AI ($10)`
-    - `Solo Technical Writer? → Claude 3.5 Sonnet`
+    - `Solo Technical Writer & Coder? → Claude Sonnet / Gemini 2.0`
   - Headline: `THE 2026 WORKSPACE AI DECISION TREE`.
   - Footer: `aiandbeyondtech.com`.
 
@@ -382,7 +382,7 @@ Writing a thesis or research paper? Learn how an automated Python agent ingests 
 * **Pin Title:** `Build Your First Python Research Agent in 50 Lines of Code`
 * **Description:**
 ```text
-A beginner-friendly Python script using Claude 3.5 Haiku and PyPDF to extract data, format equations, and summarize technical whitepapers. Copy the code on aiandbeyondtech.com! #PythonProject #LearnPython #AIAgentCode #CodeNewbie #DeveloperTips
+A beginner-friendly Python script using Gemini 2.0 Flash and PyPDF to extract data, format equations, and summarize technical whitepapers. Copy the code on aiandbeyondtech.com! #PythonProject #LearnPython #AIAgentCode #CodeNewbie #DeveloperTips
 ```
 * **Canva Pro Visual Design Brief:**
   - Dark terminal window showing clean Python script structure and successful extraction logs.
