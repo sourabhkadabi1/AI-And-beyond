@@ -61,6 +61,16 @@
   - Saturday: Recycle Top Pins 6.2, 10.2, 12.2 + Deploy Cascade Pin 14.4 (*1,000-Visitor Tech Affiliate Breakdown*)
   - Sunday: Deploy Week 4 V4 Variants (Pins 15.4, 16.4, 17.4, 18.4) across secondary boards.
 
-### WEEKS 5 TO 12 (Advanced Scaling, Automation & Monetization)
-- **Full calendar topics systematically scheduled across weeks 4-12 as transcribed in the roadmap grid above.**
+### WEEK 5 (Student Tech Stacks, Pinterest Monetization & Ethical Automation) — Status: READY TO PUBLISH
+- **Monday (Post 19 - Productivity):** *Best AI Tools to Study Smarter in 2026 (Exam Prep, Research & Spaced Repetition)*
+- **Tuesday (Post 20 - Make Money):** *How to Make Money on Pinterest with AI Content in 2026 (Anti-AI Affiliate Funnel)*
+- **Wednesday (Post 21 - Tutorials):** *Notion AI vs ChatGPT: The Definitive 2026 Workspace Shootout*
+- **Thursday (Post 22 - Web Hosting):** *How to Host a Full-Stack Website for ₹69/Month in India (The Real Architecture Guide)*
+- **Friday (Post 23 - AI Agents):** *AI Agents for Students — Automate Lab Reports, Research & Homework (Ethical Guide)*
+- **Saturday & Sunday (Weekend Pin Recycling Gap):**
+  - Saturday: Recycle Top Pins 10.2, 12.2, 14.1 + Deploy Cascade Pin 19.4 (*The Ultimate College AI Toolkit Cheat Sheet*)
+  - Sunday: Deploy Week 5 V4 Variants (Pins 20.4, 21.4, 22.4, 23.4) across secondary boards.
+
+### WEEKS 6 TO 12 (Advanced Scaling, Automation & Monetization)
+- **Full calendar topics systematically scheduled across weeks 6-12 as transcribed in the roadmap grid above.**
 - Each upcoming week will receive its corresponding Deep Research Document, Ready-to-Paste HTML Suite, and Anti-AI Pinterest Playbook.
