@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Calendar, Clock } from 'lucide-react'
+import { optimizeImageUrl } from '../utils/image'
 
 function readTime(content) {
   const words = content?.split(' ').length || 0
@@ -7,22 +8,28 @@ function readTime(content) {
 }
 
 export default function BlogCard({ post }) {
+  const optimizedCover = post.cover_image ? optimizeImageUrl(post.cover_image, { width: 600 }) : null
+
   return (
     <Link
       to={`/blog/${post.slug}`}
       className="group block rounded-xl bg-white dark:bg-[#141414] border border-[#E5E5E5] dark:border-[#262626] hover:border-[#F5A623]/50 overflow-hidden transition-all duration-300"
     >
-      {post.cover_image && (
-        <div className="h-48 overflow-hidden bg-[#F5F5F5] dark:bg-[#1C1C1C]">
+      {optimizedCover && (
+        <div className="h-48 overflow-hidden bg-[#F5F5F5] dark:bg-[#1C1C1C] relative aspect-[16/9]">
           <img
-            src={post.cover_image}
+            src={optimizedCover}
             alt={post.title}
+            loading="lazy"
+            decoding="async"
+            width="400"
+            height="192"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>
       )}
 
-      {!post.cover_image && (
+      {!optimizedCover && (
         <div className="h-40 bg-[#F5F5F5] dark:bg-[#1C1C1C] flex items-center justify-center">
           <span className="text-xs font-semibold px-3 py-1 rounded-lg bg-[#F5A623]/10 text-[#F5A623] border border-[#F5A623]/20">
             {post.category}
@@ -31,7 +38,7 @@ export default function BlogCard({ post }) {
       )}
 
       <div className="p-5">
-        {post.cover_image && (
+        {optimizedCover && (
           <span className="text-xs font-semibold px-2.5 py-1 rounded-lg bg-[#F5A623]/10 text-[#F5A623] border border-[#F5A623]/20 mb-3 inline-block">
             {post.category}
           </span>

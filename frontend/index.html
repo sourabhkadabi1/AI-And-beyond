@@ -9,7 +9,7 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link id="canonical-url" rel="canonical" href="https://www.aiandbeyondtech.com/" />
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.aiandbeyondtech.com/" />
@@ -25,13 +25,40 @@
     <meta name="twitter:image" content="https://www.aiandbeyondtech.com/hero.png" />
 
     <meta name="p:domain_verify" content="580c4e105bbad789201ea97ffdcecbf0" />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Critical Preconnects for Network Dependency Tree -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Preload Critical LCP Hero Image for Instant Discovery -->
+    <link rel="preload" as="image" href="/hero.webp" type="image/webp" fetchpriority="high" />
+
+    <!-- Non-render-blocking Font Loading -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
+    </noscript>
+
+    <!-- Synchronous Theme Setup (Prevents FOUC & Forced Reflow) -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('theme');
+          var isDark = saved ? saved === 'dark' : (window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)').matches : true);
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch(e) {}
+      })();
+    </script>
+
     <title>AIAndBeyond — AI Tools & Tech</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
-
 </html>
-

@@ -155,6 +155,9 @@ export default function Home() {
                   alt="AI and Beyond Essentials"
                   loading="eager"
                   fetchPriority="high"
+                  decoding="async"
+                  width="600"
+                  height="400"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none';
@@ -274,6 +277,10 @@ export default function Home() {
                   <img 
                     src={cat.image} 
                     alt={cat.name} 
+                    loading="lazy"
+                    decoding="async"
+                    width="400"
+                    height="176"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       e.currentTarget.style.display = 'none';
@@ -378,7 +385,15 @@ export default function Home() {
                   {/* Image slot */}
                   <div className="h-44 overflow-hidden relative bg-[#F5F5F5] dark:bg-[#1C1C1C] border-b border-[#E5E5E5] dark:border-[#262626]">
                     {aff.image ? (
-                      <img src={aff.image} alt={aff.name} className="w-full h-full object-cover" />
+                      <img 
+                        src={aff.image} 
+                        alt={aff.name} 
+                        loading="lazy" 
+                        decoding="async" 
+                        width="400" 
+                        height="176" 
+                        className="w-full h-full object-cover" 
+                      />
                     ) : (
                       <div className="w-full h-full flex flex-col items-center justify-center p-3 text-center">
                         <ImageIcon className="w-8 h-8 mb-1 text-[#F5A623] opacity-60" />

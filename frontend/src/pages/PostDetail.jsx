@@ -8,6 +8,7 @@ import AffiliateBlock from '../components/AffiliateBlock';
 import BlogCard from '../components/BlogCard';
 import { categoryAffiliate } from '../utils/affiliates';
 import { updateSEO } from '../utils/seo';
+import { optimizeImageUrl } from '../utils/image';
 import { ArrowLeft, Calendar, Clock, Bookmark } from 'lucide-react';
 
 const CATEGORY_COLORS = {
@@ -223,11 +224,16 @@ export default function PostDetail() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E5] dark:border-[#262626] rounded-xl p-6 sm:p-12">
             {post.cover_image && (
-              <figure className="mb-10 rounded-lg overflow-hidden border border-[#E5E5E5] dark:border-[#262626]">
+              <figure className="mb-10 rounded-lg overflow-hidden border border-[#E5E5E5] dark:border-[#262626] aspect-[16/9] bg-[#F5F5F5] dark:bg-[#1C1C1C]">
                 <img 
-                  src={post.cover_image} 
+                  src={optimizeImageUrl(post.cover_image, { width: 1200 })} 
                   alt={post.title}
-                  className="w-full object-cover max-h-[520px]"
+                  width="1200"
+                  height="675"
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                  className="w-full h-full object-cover max-h-[520px]"
                 />
               </figure>
             )}
